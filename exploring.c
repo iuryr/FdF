@@ -6,14 +6,27 @@
 
 #define WINDOW_WIDTH 800
 #define	WINDOW_HEIGHT 600
+
 #define MLX_ERROR 1
+
 #define RED_PIXEL 0xFF0000
+#define	GREEN_PIXEL 0xFF00
 
 typedef struct s_data
 {
 	void *mlx_ptr;
 	void *win_ptr;
 }	t_data;
+
+// x & y in the rect corresponds to upper left corner
+typedef struct s_rect
+{
+	int x;
+	int y;
+	int width;
+	int height;
+	int color;
+} t_rect;
 
 int handle_keypress(int keysym, t_data *data)
 {
@@ -30,14 +43,33 @@ int handle_keyrelease(int keysym, void *data)
 	return (0);
 }
 
+int render_rect(t_data *data, t_rect rect)
+{
+	int i;
+	int j;
+
+	if (data->win_ptr == NULL)
+		return (1);
+
+	i = rect.y;
+	while (i < rect.y + rect.height)
+	{
+		j = rect.x;
+		while (j < rect.x + rect.width)
+			mlx_pixel_put(data->mlx_ptr, data->win_ptr, j++, i, rect.color);
+		++i;
+	}
+	return (0);
+}
+
 int	render(t_data *data)
 {
-	if (data->win_ptr != NULL) //importante checar se a janela ainda existe
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, RED_PIXEL);
-
-	return (0);
+	render_rect(data, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
+	render_rect(data, (t_rect){0, 0, 100, 100, RED_PIXEL});
 	
+	return (0);
 }
+
 
 int main(void)
 {
