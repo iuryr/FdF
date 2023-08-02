@@ -4,21 +4,16 @@
 #include <X11/keysym.h> //macros com definição de teclas
 #include <X11/X.h> //macros com definição de events e masks
 
-#define WINDOW_WIDTH 600
-#define	WINDOW_HEIGHT 300
+#define WINDOW_WIDTH 800
+#define	WINDOW_HEIGHT 600
 #define MLX_ERROR 1
+#define RED_PIXEL 0xFF0000
 
 typedef struct s_data
 {
 	void *mlx_ptr;
 	void *win_ptr;
 }	t_data;
-
-int	handle_no_event(void *data)
-{
-	/* inutil por ora*/
-	return (0);
-}
 
 int handle_keypress(int keysym, t_data *data)
 {
@@ -33,6 +28,15 @@ int handle_keyrelease(int keysym, void *data)
 {
 	printf("Keyrelease: %d\n", keysym);
 	return (0);
+}
+
+int	render(t_data *data)
+{
+	if (data->win_ptr != NULL) //importante checar se a janela ainda existe
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, RED_PIXEL);
+
+	return (0);
+	
 }
 
 int main(void)
@@ -54,8 +58,7 @@ int main(void)
 	}
 
 	//preparar hooks
-	mlx_loop_hook(data->mlx_ptr, &handle_no_event, data);
-	
+	mlx_loop_hook(data->mlx_ptr, &render, data); //cada frame vai renderizar o mesmo pixel
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
 
