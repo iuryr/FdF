@@ -5,13 +5,23 @@
 #include <X11/X.h> //macros com definição de events e masks
 
 #define WINDOW_WIDTH 800
-#define	WINDOW_HEIGHT 600
+#define	WINDOW_HEIGHT 800
 
 #define MLX_ERROR 1
 
 #define RED_PIXEL 0xFF0000
 #define	GREEN_PIXEL 0x00FF00
 #define	WHITE_PIXEL 0xFFFFFF
+
+//t_line data type
+typedef struct s_line
+{
+	int x_s;
+	int y_s;
+	int x_f;
+	int y_f;
+	int color;
+} t_line;
 
 //t_img data tyoe
 typedef struct s_img
@@ -65,6 +75,35 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
+
+int	render_line(t_img *img, t_line line)
+{
+	int dx = line.x_f - line.x_s;
+	int dy = line.y_f - line.y_s;
+	int i;
+	int j;
+	int p;
+
+	p = 2 * dy - dx;
+
+	i = line.x_s;
+	j = line.y_s;
+	while (i < line.x_f)
+	{
+		img_pix_put(img, i, j, line.color);
+		i++;
+
+		if (p < 0)
+			p = p + 2 * dy;
+		else
+		{
+			p = p + 2 * dy + 2 * dx;
+			j++;
+		}
+	}
+	return (0);
+}
+
 int render_rect(t_img *img, t_rect rect)
 {
 	int i;
@@ -104,6 +143,7 @@ int	render(t_data *data)
 	render_bg(&data->img, WHITE_PIXEL);
 	render_rect(&data->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
 	render_rect(&data->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
+	render_line(&data->img, (t_line){0, 0, 400, 10, RED_PIXEL});
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	
