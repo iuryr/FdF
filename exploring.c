@@ -10,13 +10,25 @@
 #define MLX_ERROR 1
 
 #define RED_PIXEL 0xFF0000
-#define	GREEN_PIXEL 0xFF00
+#define	GREEN_PIXEL 0x00FF00
 #define	WHITE_PIXEL 0xFFFFFF
 
+//t_img data tyoe
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp; //bits per pixel
+	int		line_len;
+	int		endian;
+} t_img;
+
+//data about xserver connection, window, etc
 typedef struct s_data
 {
 	void *mlx_ptr;
 	void *win_ptr;
+	t_img	img;
 }	t_data;
 
 // x & y in the rect corresponds to upper left corner
@@ -28,6 +40,7 @@ typedef struct s_rect
 	int height;
 	int color;
 } t_rect;
+
 
 int handle_keypress(int keysym, t_data *data)
 {
@@ -44,52 +57,58 @@ int handle_keyrelease(int keysym, void *data)
 	return (0);
 }
 
-int render_rect(t_data *data, t_rect rect)
+void	img_pix_put(t_img *img, int x, int y, int color)
+{
+	char *pixel;
+
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(int *)pixel = color;
+}
+
+int render_rect(t_img *img, t_rect rect)
 {
 	int i;
 	int j;
-
-	if (data->win_ptr == NULL)
-		return (1);
 
 	i = rect.y;
 	while (i < rect.y + rect.height)
 	{
 		j = rect.x;
 		while (j < rect.x + rect.width)
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, j++, i, rect.color);
+			img_pix_put(img, j++, i, rect.color);
 		++i;
 	}
 	return (0);
 }
 
-void	render_bg(t_data *data, int color)
+void	render_bg(t_img *img, int color)
 {
 	int i;
 	int j;
-
-	if (data->win_ptr == NULL)
-		return ;
 
 	i = 0;
 	while (i < WINDOW_HEIGHT)
 	{
 		j = 0;
 		while (j < WINDOW_WIDTH)
-			mlx_pixel_put(data-> mlx_ptr, data->win_ptr, j++, i, color);
+			img_pix_put(img, j++, i, color);
 		++i;
 	}
 }
 
 int	render(t_data *data)
 {
-	render_bg(data, WHITE_PIXEL);
-	render_rect(data, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
-	render_rect(data, (t_rect){0, 0, 100, 100, RED_PIXEL});
+	if (data->win_ptr == NULL)
+		return (-1);
+
+	render_bg(&data->img, WHITE_PIXEL);
+	render_rect(&data->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
+	render_rect(&data->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
+
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	
 	return (0);
 }
-
 
 int main(void)
 {
@@ -108,6 +127,10 @@ int main(void)
 		free(data->mlx_ptr);
 		return (MLX_ERROR);
 	}
+
+	//creating an image
+	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, &data->img.line_len, &data->img.endian);
 
 	//preparar hooks
 	mlx_loop_hook(data->mlx_ptr, &render, data); //cada frame vai renderizar o mesmo pixel
