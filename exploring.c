@@ -12,14 +12,15 @@
 #define RED_PIXEL 0xFF0000
 #define	GREEN_PIXEL 0x00FF00
 #define	WHITE_PIXEL 0xFFFFFF
+#define	BLUE_PIXEL 0x0000FF
 
 //t_line data type
 typedef struct s_line
 {
-	int x_s;
-	int y_s;
-	int x_f;
-	int y_f;
+	int x_start;
+	int y_start;
+	int x_end;
+	int y_end;
 	int color;
 } t_line;
 
@@ -51,11 +52,26 @@ typedef struct s_rect
 	int color;
 } t_rect;
 
+int	ft_abs(int number)
+{
+	if (number >= 0)
+		return (number);
+	else
+		return (number * -1);
+}
+
 
 int handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
+	{
+		mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		free(data);
+		exit(0);
+	}
 
 	printf("Keypress: %d\n", keysym);
 	return (0);
@@ -75,20 +91,73 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-
-int	render_line(t_img *img, t_line line)
+void draw_h_line(t_img *img, t_line line)
 {
-	int dx = line.x_f - line.x_s;
-	int dy = line.y_f - line.y_s;
+	int i;
+	i = line.x_start;
+
+	while (i <= line.x_end)
+	{
+		img_pix_put(img, i, line.y_start, line.color);
+		i++;
+	}
+}
+
+void draw_v_line(t_img *img, t_line line)
+{
+	int j;
+	j = line.y_start;
+
+	while (j <= line.y_end)
+	{
+		img_pix_put(img, line.x_start, j, line.color);
+		j++;
+	}
+}
+
+void draw_d_line(t_img *img, t_line line)
+{
+	int dx = line.x_end - line.x_start;
+	int dy = line.y_end - line.y_start;
+	int i;
+	int j;
+
+	i = line.x_start;
+	j = line.y_start;
+
+	if (dx / dy == 1)
+	{
+		while (i <= line.x_end)
+		{
+			img_pix_put(img, i, i, line.color);
+			i++;
+		}
+	}
+	if (dx / dy == -1)
+	{
+		while (i <= line.x_end)
+		{
+			img_pix_put(img, i, j, line.color);
+			i++;
+			j--;
+		}
+	}
+		
+}
+
+void draw_xsample_line(t_img *img, t_line line)
+{
+	int dx = line.x_end - line.x_start;
+	int dy = line.y_end - line.y_start;
 	int i;
 	int j;
 	int p;
 
 	p = 2 * dy - dx;
 
-	i = line.x_s;
-	j = line.y_s;
-	while (i < line.x_f)
+	i = line.x_start;
+	j = line.y_start;
+	while (i <= line.x_end)
 	{
 		img_pix_put(img, i, j, line.color);
 		i++;
@@ -97,10 +166,55 @@ int	render_line(t_img *img, t_line line)
 			p = p + 2 * dy;
 		else
 		{
-			p = p + 2 * dy + 2 * dx;
+			p = p + 2 * dy - 2 * dx;
 			j++;
 		}
 	}
+}
+
+void draw_ysample_line(t_img *img, t_line line)
+{
+	int dx = line.x_end - line.x_start;
+	int dy = line.y_end - line.y_start;
+	int i;
+	int j;
+	int p;
+
+	p = 2 * dx - dy;
+
+	i = line.x_start;
+	j = line.y_start;
+	while (j <= line.y_end)
+	{
+		img_pix_put(img, i, j, line.color);
+		j++;
+
+		if (p < 0)
+			p = p + 2 * dx;
+		else
+		{
+			p = p + 2 * dx - 2 * dy;
+			i++;
+		}
+	}
+}
+
+
+int	render_line(t_img *img, t_line line)
+{
+	int dx = line.x_end - line.x_start;
+	int dy = line.y_end - line.y_start;
+
+	if (dx == 0)
+		draw_v_line(img, line);
+	else if (dy == 0)
+		draw_h_line(img, line);
+	else if (ft_abs(dx) == ft_abs(dy))
+		draw_d_line(img, line);
+	else if (dx > dy)
+		draw_xsample_line(img, line);
+	else if (dx < dy)
+		draw_ysample_line(img, line);
 	return (0);
 }
 
@@ -141,9 +255,13 @@ int	render(t_data *data)
 		return (-1);
 
 	render_bg(&data->img, WHITE_PIXEL);
-	render_rect(&data->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
-	render_rect(&data->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
-	render_line(&data->img, (t_line){0, 0, 400, 10, RED_PIXEL});
+	// render_rect(&data->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
+	// render_rect(&data->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
+	render_line(&data->img, (t_line){0, 0, 400, 50, RED_PIXEL});
+	render_line(&data->img, (t_line){0, 0, 50, 400, BLUE_PIXEL});
+	render_line(&data->img, (t_line){400, 400, 500, 300, RED_PIXEL});//d negativa
+	render_line(&data->img, (t_line){30, 0, 30, 200, RED_PIXEL}); //vline
+	render_line(&data->img, (t_line){30, 200, 300, 200, RED_PIXEL}); //hline
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	
@@ -180,7 +298,4 @@ int main(void)
 	mlx_loop(data->mlx_ptr);
 
 	//exit loop if there's no window left
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free(data);
 }
