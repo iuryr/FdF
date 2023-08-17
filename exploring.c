@@ -152,11 +152,20 @@ void draw_xsample_line(t_img *img, t_line line)
 	int i;
 	int j;
 	int p;
+	int y_increment;
+
+	y_increment = 1;
 
 	p = 2 * dy - dx;
 
 	i = line.x_start;
 	j = line.y_start;
+
+	if (dy < 0)
+	{
+		y_increment = -1;
+		dy = -1 * dy;
+	}
 	while (i <= line.x_end)
 	{
 		img_pix_put(img, i, j, line.color);
@@ -167,7 +176,7 @@ void draw_xsample_line(t_img *img, t_line line)
 		else
 		{
 			p = p + 2 * dy - 2 * dx;
-			j++;
+			j = j + y_increment;
 		}
 	}
 }
@@ -179,11 +188,21 @@ void draw_ysample_line(t_img *img, t_line line)
 	int i;
 	int j;
 	int p;
+	int x_increment;
+
+	x_increment = 1;
 
 	p = 2 * dx - dy;
 
 	i = line.x_start;
 	j = line.y_start;
+
+	if (dx < 0)
+	{
+		x_increment = -1;
+		dx = -1 * dx;
+	}
+
 	while (j <= line.y_end)
 	{
 		img_pix_put(img, i, j, line.color);
@@ -194,7 +213,7 @@ void draw_ysample_line(t_img *img, t_line line)
 		else
 		{
 			p = p + 2 * dx - 2 * dy;
-			i++;
+			i = i + x_increment;
 		}
 	}
 }
@@ -211,9 +230,9 @@ int	render_line(t_img *img, t_line line)
 		draw_h_line(img, line);
 	else if (ft_abs(dx) == ft_abs(dy))
 		draw_d_line(img, line);
-	else if (dx > dy)
+	else if (ft_abs(dx) > ft_abs(dy))
 		draw_xsample_line(img, line);
-	else if (dx < dy)
+	else if (ft_abs(dx) < ft_abs(dy))
 		draw_ysample_line(img, line);
 	return (0);
 }
@@ -257,11 +276,14 @@ int	render(t_data *data)
 	render_bg(&data->img, WHITE_PIXEL);
 	// render_rect(&data->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
 	// render_rect(&data->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
-	render_line(&data->img, (t_line){0, 0, 400, 50, RED_PIXEL});
-	render_line(&data->img, (t_line){0, 0, 50, 400, BLUE_PIXEL});
-	render_line(&data->img, (t_line){400, 400, 500, 300, RED_PIXEL});//d negativa
 	render_line(&data->img, (t_line){30, 0, 30, 200, RED_PIXEL}); //vline
 	render_line(&data->img, (t_line){30, 200, 300, 200, RED_PIXEL}); //hline
+	render_line(&data->img, (t_line){400, 400, 500, 500, RED_PIXEL});//d positiva
+	render_line(&data->img, (t_line){400, 400, 500, 300, RED_PIXEL});//d negativa
+	render_line(&data->img, (t_line){0, 0, 400, 50, GREEN_PIXEL}); //x sample positive slope
+	render_line(&data->img, (t_line){0, 0, 50, 400, BLUE_PIXEL}); //y sample positive slope
+	render_line(&data->img, (t_line){400, 50, 800, 0, GREEN_PIXEL}); //x sample negative slope
+	render_line(&data->img, (t_line){50, 400, 0, 800, BLUE_PIXEL}); //y sample negative slope
 
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	
