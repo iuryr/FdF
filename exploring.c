@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <X11/keysym.h> //macros com definição de teclas
 #include <X11/X.h> //macros com definição de events e masks
+#include <math.h>
 
 #define WINDOW_WIDTH 800
 #define	WINDOW_HEIGHT 800
@@ -94,24 +95,32 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 void draw_h_line(t_img *img, t_line line)
 {
 	int i;
+	int dx = line.x_end - line.x_start;
 	i = line.x_start;
 
-	while (i <= line.x_end)
+	while (i != line.x_end)
 	{
 		img_pix_put(img, i, line.y_start, line.color);
-		i++;
+		if (dx < 0)
+			i--;
+		else
+			i++;
 	}
 }
 
 void draw_v_line(t_img *img, t_line line)
 {
 	int j;
+	int dy = line.y_end - line.y_start;
 	j = line.y_start;
 
-	while (j <= line.y_end)
+	while (j != line.y_end)
 	{
 		img_pix_put(img, line.x_start, j, line.color);
-		j++;
+		if (dy < 0)
+			j--;
+		else
+			j++;
 	}
 }
 
@@ -237,6 +246,21 @@ void draw_ysample_line(t_img *img, t_line line)
 	}
 }
 
+t_line rotate_45dl(t_line og_line)
+{	
+	double theta;
+	theta = M_PI / 4 ;
+
+	t_line rotated_line;
+	rotated_line.x_start = floor((og_line.x_start - 100) * cos(theta) - (og_line.y_start - 150) * sin(theta)) + 100 ;  
+	rotated_line.y_start = floor((og_line.x_start -100) * sin(theta) + (og_line.y_start -150) * cos(theta)) + 150 ;  
+	rotated_line.x_end = floor((og_line.x_end -100) * cos(theta) - (og_line.y_end - 150) * sin(theta)) + 100;  
+	rotated_line.y_end = floor((og_line.x_end - 100) * sin(theta) + (og_line.y_end - 150) * cos(theta)) + 150 ; 
+	rotated_line.color = GREEN_PIXEL;
+
+	return (rotated_line);
+
+}
 
 int	render_line(t_img *img, t_line line)
 {
@@ -256,16 +280,6 @@ int	render_line(t_img *img, t_line line)
 	return (0);
 }
 
-t_rect rotate_45dl(t_rect og_rect)
-{	
-	int transf_matrix[2][2];
-
-	transf_matrix[0][0] = 1;
-	transf_matrix[0][1] = 1;
-	transf_matrix[1][0] = -1;
-	transf_matrix[1][1] = 1;
-
-}
 
 int render_rect(t_img *img, t_rect rect)
 {
@@ -314,11 +328,24 @@ int	render(t_data *data)
 	// render_line(&data->img, (t_line){0, 0, 50, 400, BLUE_PIXEL}); //y sample positive slope
 	// render_line(&data->img, (t_line){400, 50, 800, 0, GREEN_PIXEL}); //x sample negative slope
 	// render_line(&data->img, (t_line){50, 400, 0, 800, BLUE_PIXEL}); //y sample negative slope
-	render_line(&data->img, (t_line){100, 100, 150, 150, BLUE_PIXEL}); //y sample negative slope
-	render_line(&data->img, (t_line){150, 150, 100, 200, BLUE_PIXEL}); //y sample negative slope
-	render_line(&data->img, (t_line){100, 200, 50, 150, BLUE_PIXEL}); //y sample negative slope
-	render_line(&data->img, (t_line){50, 150, 100, 100, BLUE_PIXEL}); //y sample negative slope
+	t_line line1 = (t_line){100, 100, 150, 150, BLUE_PIXEL};
+	t_line line2 = (t_line){150, 150, 100, 200, BLUE_PIXEL};
+	t_line line3 = (t_line){100, 200, 50, 150, BLUE_PIXEL};
+	t_line line4 = (t_line){50, 150, 100, 100, BLUE_PIXEL};
+	render_line(&data->img, line1); 
+	render_line(&data->img, line2);
+	render_line(&data->img, line3); 
+	render_line(&data->img, line4);
 
+	t_line line5 = rotate_45dl(line1);
+	t_line line6 = rotate_45dl(line2);
+	t_line line7 = rotate_45dl(line3);
+	t_line line8 = rotate_45dl(line4);
+	render_line(&data->img, line5);
+	render_line(&data->img, line6);
+	render_line(&data->img, line7);
+	render_line(&data->img, line8);
+	
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	
 	return (0);
