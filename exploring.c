@@ -332,19 +332,27 @@ int	render(t_data *data)
 	t_line line2 = (t_line){150, 150, 100, 200, BLUE_PIXEL};
 	t_line line3 = (t_line){100, 200, 50, 150, BLUE_PIXEL};
 	t_line line4 = (t_line){50, 150, 100, 100, BLUE_PIXEL};
+	t_line line5 = (t_line){100, 100, 100, 200, BLUE_PIXEL};
+	t_line line6 = (t_line){50, 150, 150, 150, BLUE_PIXEL};
 	render_line(&data->img, line1); 
 	render_line(&data->img, line2);
 	render_line(&data->img, line3); 
 	render_line(&data->img, line4);
-
-	t_line line5 = rotate_45dl(line1);
-	t_line line6 = rotate_45dl(line2);
-	t_line line7 = rotate_45dl(line3);
-	t_line line8 = rotate_45dl(line4);
 	render_line(&data->img, line5);
 	render_line(&data->img, line6);
+
+	t_line line7 = rotate_45dl(line1);
+	t_line line8 = rotate_45dl(line2);
+	t_line line9 = rotate_45dl(line3);
+	t_line line10 = rotate_45dl(line4);
+	t_line line11 = rotate_45dl(line5);
+	t_line line12 = rotate_45dl(line6);
 	render_line(&data->img, line7);
 	render_line(&data->img, line8);
+	render_line(&data->img, line9);
+	render_line(&data->img, line10);
+	render_line(&data->img, line11);
+	render_line(&data->img, line12);
 	
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
 	
