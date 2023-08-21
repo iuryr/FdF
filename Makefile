@@ -7,7 +7,8 @@ FLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
 OTHER_LIBS = -lX11 -lXext -lmlx -lm
 
-SRC_FILES = main.c
+SRC_FILES = main.c \
+			00_parsemap.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
