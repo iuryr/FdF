@@ -6,47 +6,36 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/18 18:50:48 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:08:54 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
-int	get_map_nrows(int map_fd)
+void	get_map_dimensions(t_map *map, char *filename)
 {
-	char *gnl_return;
+	int				fd;
+	char	*first_row;
 	int nrows;
-
-	nrows = 0;
-	while ((gnl_return = get_next_line(map_fd)) != NULL)
+	
+	fd = open(filename, O_RDONLY);
+	first_row = get_next_line(fd);
+	nrows = 1;
+	while (get_next_line(fd))
 		nrows++;
-	return (nrows);
+	map->width = count_word(first_row, ' ');
+	map->length = nrows;
+	close(fd);
 }
 
-int	get_map_ncols(int map_fd)
+int main(int argc, char *argv[])
 {
-	char *first_row;
-	int	ncols;
-
-	first_row = get_next_line(map_fd);
-	ncols = count_word(first_row, ' ');
-	return (ncols);
-}
-
-int main(void)
-{
-	int map_fd;
-	int	ncols;
-	int	nrows;
 	t_map	map;
 
-	map_fd = open("maps/test_maps/42.fdf", O_RDONLY);
-	ncols = get_map_ncols(map_fd);
-	ft_printf("ncols: %i\n", ncols);
-	close(map_fd);
+	get_map_dimensions(&map, argv[1]);
+	printf("width: %i\n", map.width);
+	printf("length: %i\n", map.length);
 
-	map_fd = open("maps/test_maps/42.fdf", O_RDONLY);
-	nrows = get_map_nrows(map_fd);
-	ft_printf("nrows: %i\n", nrows);
-	close(map_fd);
+
 }
