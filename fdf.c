@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/21 12:51:14 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:12:08 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_map_dimensions(t_map *map, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	row = get_next_line(fd);
-	map->width = count_word(row, ' ');
+	map->cols = count_word(row, ' ');
 	free(row);
 	nrows = 1;
 	row = get_next_line(fd);
@@ -31,15 +31,79 @@ void	get_map_dimensions(t_map *map, char *filename)
 		free(row);
 		row = get_next_line(fd);
 	}
-	map->length = nrows;
+	map->rows = nrows;
+	close(fd);
+}
+
+void	alloc_map_data(t_map *map)
+{
+	int	i;
+
+	map->data = (int **) malloc(map->rows * sizeof(int *));
+	i = 0;
+	while (i < map->rows)
+	{
+		map->data[i] = malloc(map->cols * sizeof(int));
+		i++;
+	}
+}
+
+void	get_map_data(t_map *map, char *filename)
+{
+	int		fd;
+	int		line;
+	int		col;
+	char	*line_content;
+	char	**split_line;
+
+	alloc_map_data(map);
+	fd = open(filename, O_RDONLY);
+	line = 0;
+	while (line < map->rows)
+	{
+		line_content = get_next_line(fd);
+		split_line = ft_split(line_content, ' ');
+		col = 0;
+		while (col < map->cols)
+		{
+			map->data[line][col] = ft_atoi(split_line[col]);
+			free(split_line[col]);
+			col++;
+		}
+		free(split_line);
+		free(line_content);
+		line++;
+	}
 	close(fd);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_map	map;
+	t_map		map;
 
 	get_map_dimensions(&map, argv[1]);
-	printf("width: %i\n", map.width);
-	printf("length: %i\n", map.length);
+	// printf("cols: %i\n", map.cols);
+	// printf("rows: %i\n", map.rows);
+	get_map_data(&map, argv[1]);
+	int i;
+	// int j;
+	// while (i < map.rows)
+	// {
+	// 	j = 0;
+	// 	while (j < map.cols)
+	// 	{
+	// 		printf("%i ", map.data[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// }
+	//freeing map data to avoid leaks;
+	i = 0;
+	while(i < map.rows)
+	{
+		free(map.data[i]);
+		i++;
+	}
+	free(map.data);
 }
