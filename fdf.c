@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/21 11:08:54 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:02:53 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,32 @@
 
 void	get_map_dimensions(t_map *map, char *filename)
 {
-	int				fd;
-	char	*first_row;
-	int nrows;
-	
+	int		fd;
+	char	*row;
+	int		nrows;
+
 	fd = open(filename, O_RDONLY);
-	first_row = get_next_line(fd);
+	row = get_next_line(fd);
+	map->width = count_word(row, ' ');
+	free(row);
 	nrows = 1;
-	while (get_next_line(fd))
+	while ((row = get_next_line(fd)))
+	{
 		nrows++;
-	map->width = count_word(first_row, ' ');
+		free(row);
+	}
 	map->length = nrows;
 	close(fd);
+	return;
 }
 
-int main(int argc, char *argv[])
+
+
+int	main(int argc, char *argv[])
 {
 	t_map	map;
 
 	get_map_dimensions(&map, argv[1]);
 	printf("width: %i\n", map.width);
 	printf("length: %i\n", map.length);
-
-
 }
