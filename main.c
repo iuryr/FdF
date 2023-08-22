@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/21 16:53:39 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:18:42 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	main(int argc, char *argv[])
 {
-	t_map		map;
+	t_matrix		map;
 
 	if (argc != 2)
 		return (1);

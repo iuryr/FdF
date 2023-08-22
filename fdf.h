@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/21 16:09:13 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:18:57 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # include <mlx.h>
 # include "./libft/libft.h"
 
-typedef struct s_map
+typedef struct s_matrix
 {
 	unsigned int	rows;
 	unsigned int	cols;
 	int				**data;
-}	t_map;
+}	t_matrix;
 
 typedef struct s_point
 {
@@ -34,9 +34,9 @@ typedef struct s_point
 }	t_point;
 
 /* Map parsing functions*/
-void	get_map_dimensions(t_map *map, char *filename);
-void	alloc_map_data(t_map *map);
-void	get_map_data(t_map *map, char *filename);
+void	get_map_dimensions(t_matrix *map, char *filename);
+void	alloc_map_data(t_matrix *map);
+void	get_map_data(t_matrix *map, char *filename);
 
 
 
