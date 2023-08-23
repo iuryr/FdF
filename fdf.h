@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/23 15:49:54 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:01:32 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define MLX_WIN_ERROR 22
 # define ARGC_ERROR 3
 # define IMG_INIT_ERROR 4
+# define PTS_INIT_ERROR 5
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
@@ -59,21 +60,21 @@ typedef struct s_matrix
 	int	**data;
 }	t_matrix;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int z;
+}	t_point;
+
 typedef struct s_meta
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	*img;
 	t_map	map;
+	t_point	*points;
 }	t_meta;
-
-
-typedef struct s_point
-{
-	double	x;
-	double	y;
-	int		color;
-}	t_point;
 
 typedef struct s_line
 {
@@ -87,12 +88,16 @@ typedef struct s_line
 /* Initialization functions */
 void	system_init(t_meta *meta);
 void	img_init(t_meta *meta);
+void	points_init(t_meta *meta);
 
 /* Map parsing functions */
 void	load_map(t_meta *meta, char *filename);
 void	get_map_dimensions(t_map *map, char *filename);
 void	alloc_map_data(t_map *map);
 void	get_map_data(t_map *map, char *filename);
+
+/* Geometry functions*/
+void	scale(t_meta *meta, int scale);
 
 /* Drawing functions */
 void	img_pix_put(t_img *img, int x, int y, int color);

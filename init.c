@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:04:15 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/23 14:43:32 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:49:15 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ void	img_init(t_meta *meta)
 			WINDOW_HEIGHT);
 	meta->img->addr = mlx_get_data_addr(meta->img->mlx_img, &meta->img->bpp,
 			&meta->img->line_len, &meta->img->endian);
+}
+
+void	points_init(t_meta *meta)
+{
+	meta->points = malloc(meta->map.points_count * sizeof(t_point));
+	if (meta->points == NULL)
+		exit(PTS_INIT_ERROR);
 }
