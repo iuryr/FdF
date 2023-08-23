@@ -6,13 +6,20 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:52:55 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/22 10:19:35 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:48:50 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_map_dimensions(t_matrix *map, char *filename)
+void	load_map(t_meta *meta, char *filename)
+{
+	get_map_dimensions(&meta->map, filename);
+	alloc_map_data(&meta->map);
+	get_map_data(&meta->map, filename);
+}
+
+void	get_map_dimensions(t_map *map, char *filename)
 {
 	int					fd;
 	char				*row;
@@ -31,10 +38,11 @@ void	get_map_dimensions(t_matrix *map, char *filename)
 		row = get_next_line(fd);
 	}
 	map->rows = nrows;
+	map->points_count = map->rows * map->cols;
 	close(fd);
 }
 
-void	alloc_map_data(t_matrix *map)
+void	alloc_map_data(t_map *map)
 {
 	unsigned int	i;
 
@@ -47,7 +55,7 @@ void	alloc_map_data(t_matrix *map)
 	}
 }
 
-void	get_map_data(t_matrix *map, char *filename)
+void	get_map_data(t_map *map, char *filename)
 {
 	int					fd;
 	unsigned int		line;

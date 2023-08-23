@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/23 15:24:02 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:49:54 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_meta
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	*img;
-}	t_meta;
-
 typedef struct s_map
 {
 	unsigned int	rows;
@@ -65,6 +58,15 @@ typedef struct s_matrix
 	int	cols;
 	int	**data;
 }	t_matrix;
+
+typedef struct s_meta
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	*img;
+	t_map	map;
+}	t_meta;
+
 
 typedef struct s_point
 {
@@ -87,6 +89,7 @@ void	system_init(t_meta *meta);
 void	img_init(t_meta *meta);
 
 /* Map parsing functions */
+void	load_map(t_meta *meta, char *filename);
 void	get_map_dimensions(t_map *map, char *filename);
 void	alloc_map_data(t_map *map);
 void	get_map_data(t_map *map, char *filename);
