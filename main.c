@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/23 14:32:35 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:16:30 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int handle_keypress(int keysym, t_meta *meta)
 		mlx_destroy_display(meta->mlx_ptr);
 		free(meta->img);
 		free(meta->mlx_ptr);
-		free(meta);
 		exit(0);
 	}
 	return (0);
@@ -30,22 +29,19 @@ int handle_keypress(int keysym, t_meta *meta)
 
 int	main(int argc, char *argv[])
 {
-	t_meta	*meta;
+	t_meta	meta;
 	// t_map		map;
 	// unsigned int	i;
 	// t_point			*projected_points;
 
-	meta = malloc(sizeof(t_meta));
-	if (meta == NULL)
-		exit(SYS_ERROR); //mlx error
-	system_init(meta);
-	img_init(meta);
+	system_init(&meta);
+	img_init(&meta);
 	if (argc != 2)
 		exit(ARGC_ERROR);
 	write(1, ++argv, 15);
-	mlx_loop_hook(meta->mlx_ptr, &render, meta);
-	mlx_hook(meta->win_ptr, KeyPress, KeyPressMask, &handle_keypress, meta);
-	mlx_loop(meta->mlx_ptr);
+	mlx_loop_hook(meta.mlx_ptr, &render, &meta);
+	mlx_hook(meta.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &meta);
+	mlx_loop(meta.mlx_ptr);
 
 	// get_map_dimensions(&map, argv[1]);
 	// get_map_data(&map, argv[1]);
