@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/23 15:05:32 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:24:02 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,8 @@ void	img_pix_put(t_img *img, int x, int y, int color);
 /* Rendering Functions */
 int		render(t_meta *meta);
 void	render_bg(t_img *img, int color);
+
+/* Key pressing & releasing*/
+int handle_keypress(int keysym, t_meta *meta);
 
 #endif //_FDF_H_

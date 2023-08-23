@@ -6,26 +6,11 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/23 15:16:30 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:23:14 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
-
-int handle_keypress(int keysym, t_meta *meta)
-{
-	if (keysym == XK_Escape)
-	{
-		mlx_destroy_image(meta->mlx_ptr, meta->img->mlx_img);
-		mlx_destroy_window(meta->mlx_ptr, meta->win_ptr);
-		mlx_destroy_display(meta->mlx_ptr);
-		free(meta->img);
-		free(meta->mlx_ptr);
-		exit(0);
-	}
-	return (0);
-}
 
 int	main(int argc, char *argv[])
 {
