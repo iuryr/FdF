@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/23 13:41:53 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:05:32 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp; //bits per pixel
+	int		bpp;
 	int		line_len;
 	int		endian;
-} t_img;
+}	t_img;
 
 typedef struct s_meta
 {
@@ -70,17 +70,17 @@ typedef struct s_point
 {
 	double	x;
 	double	y;
-	int	color;
+	int		color;
 }	t_point;
 
 typedef struct s_line
 {
-	int x_start;
-	int y_start;
-	int x_end;
-	int y_end;
-	int color;
-} t_line;
+	int	x_start;
+	int	y_start;
+	int	x_end;
+	int	y_end;
+	int	color;
+}	t_line;
 
 /* Initialization functions */
 void	system_init(t_meta *meta);
@@ -97,7 +97,5 @@ void	img_pix_put(t_img *img, int x, int y, int color);
 /* Rendering Functions */
 int		render(t_meta *meta);
 void	render_bg(t_img *img, int color);
-
-
 
 #endif //_FDF_H_
