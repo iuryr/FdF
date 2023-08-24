@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 10:23:19 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:53:28 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		exit(ARGC_ERROR);
 	load_map(&meta, argv[1]);
-	points_init(&meta);
+	pt_matrix_init(&meta);
+	alloc_ptmatrix_data(&meta.pt_matrix);
 	system_init(&meta);
-	scale(&meta, 10);
+	scale(&meta, 20);
 	img_init(&meta);
 	write(1, ++argv, 15);
 	mlx_loop_hook(meta.mlx_ptr, &render, &meta);

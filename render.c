@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:46:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 10:38:13 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:35:46 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,20 @@ void	render_bg(t_img *img, int color)
 
 void	render_points(t_meta *meta, int color)
 {
-	unsigned int	index;
+	unsigned int	i;
+	unsigned int	j;
 
-	index = 0;
-	while (index < meta->map.points_count)
+	i = 0;
+	while (i < meta->pt_matrix.rows)
 	{
-		img_pix_put(meta->img, meta->points[index].x, meta->points[index].y,
-			color);
-		index++;
+		j = 0;
+		while (j < meta->pt_matrix.cols)
+		{
+			img_pix_put(meta->img, meta->pt_matrix.data[i][j].x,
+			   meta->pt_matrix.data[i][j].y, color);
+			j++;
+		}
+		i++;
 	}
 }
 

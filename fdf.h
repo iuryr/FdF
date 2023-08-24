@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 10:37:36 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:51:59 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ typedef struct s_map
 	int				**data;
 }	t_map;
 
-typedef struct s_matrix
-{
-	int	rows;
-	int	cols;
-	int	**data;
-}	t_matrix;
-
 typedef struct s_point
 {
 	int	x;
@@ -67,13 +60,20 @@ typedef struct s_point
 	int	z;
 }	t_point;
 
+typedef struct s_ptmatrix
+{
+	unsigned int	rows;
+	unsigned int	cols;
+	t_point			**data;
+}	t_ptmatrix;
+
 typedef struct s_meta
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	*img;
 	t_map	map;
-	t_point	*points;
+	t_ptmatrix	pt_matrix;
 }	t_meta;
 
 typedef struct s_line
@@ -88,7 +88,7 @@ typedef struct s_line
 /* Initialization functions */
 void	system_init(t_meta *meta);
 void	img_init(t_meta *meta);
-void	points_init(t_meta *meta);
+void	pt_matrix_init(t_meta *meta);
 
 /* Map parsing functions */
 void	load_map(t_meta *meta, char *filename);
@@ -97,6 +97,7 @@ void	alloc_map_data(t_map *map);
 void	get_map_data(t_map *map, char *filename);
 
 /* Geometry functions*/
+void	alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
 void	scale(t_meta *meta, int scale);
 
 /* Drawing functions */
