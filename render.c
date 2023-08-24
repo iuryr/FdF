@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:46:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 13:35:46 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:56:38 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	render_points(t_meta *meta, int color)
 		while (j < meta->pt_matrix.cols)
 		{
 			img_pix_put(meta->img, meta->pt_matrix.data[i][j].x,
-			   meta->pt_matrix.data[i][j].y, color);
+				meta->pt_matrix.data[i][j].y, color);
 			j++;
 		}
 		i++;

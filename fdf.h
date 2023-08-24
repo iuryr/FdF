@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 13:51:59 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:55:15 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ typedef struct s_ptmatrix
 
 typedef struct s_meta
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	*img;
-	t_map	map;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_img		*img;
+	t_map		map;
 	t_ptmatrix	pt_matrix;
 }	t_meta;
 
