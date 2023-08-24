@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   02_projection.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 15:45:09 by iusantos         ###   ########.fr       */
+/*   Created: 2023/08/22 15:22:08 by iusantos          #+#    #+#             */
+/*   Updated: 2023/08/22 15:22:27 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, char *argv[])
+void	to_iso(t_map *map, t_point *proj_point_array)
 {
-	t_meta	meta;
-	// unsigned int	i;
-	// t_point			*projected_points;
+	unsigned int	index;
+	unsigned int	i;
+	unsigned int	j;
 
-	if (argc != 2)
-		exit(ARGC_ERROR);
-	load_map(&meta, argv[1]);
-	pt_matrix_init(&meta);
-	alloc_ptmatrix_data(&meta.pt_matrix);
-	system_init(&meta);
-	scale(&meta, 20);
-	img_init(&meta);
-	mlx_loop_hook(meta.mlx_ptr, &render, &meta);
-	mlx_hook(meta.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &meta);
-	mlx_loop(meta.mlx_ptr);
+	index = 0;
+	i = 0;
+	while (index < map->points_count)
+	{
+		while(i < map->rows)
+		{
+			j = 0;
+			while (j < map->cols)
+			{
+				proj_point_array[index].x = 1 / sqrt(2) * (i - map->data[i][j]);
+				proj_point_array[index].y =  i - 2*j + map->data[i][j];
+				index++;
+				j++;
+			}
+			i++;
+		}
+	}
 }

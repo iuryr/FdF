@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:04:15 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 13:30:47 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:31:17 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,4 @@ void	pt_matrix_init(t_meta *meta)
 {
 	meta->pt_matrix.rows = meta->map.rows;
 	meta->pt_matrix.cols = meta->map.cols;
-	meta->pt_matrix.data = malloc(meta->map.points_count * sizeof(t_point));
-	if (meta->pt_matrix.data == NULL)
-		exit(PTS_INIT_ERROR);
 }
