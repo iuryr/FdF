@@ -15,8 +15,6 @@
 int	main(int argc, char *argv[])
 {
 	t_meta	meta;
-	// unsigned int	i;
-	// t_point			*projected_points;
 
 	if (argc != 2)
 		exit(ARGC_ERROR);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft/libft.h"
 
 void	load_map(t_meta *meta, char *filename)
 {
@@ -19,25 +20,75 @@ void	load_map(t_meta *meta, char *filename)
 	get_map_data(&meta->map, filename);
 }
 
+unsigned int	count_cols(char *line)
+{
+	int cols;
+
+	cols = count_word(line, ' ');
+	return (cols);
+}
+
+char *gnl_wo_nl(int fd)
+{
+	char *line;
+	char *s;
+
+	line = get_next_line(fd);
+	if (line)
+	{
+		s = ft_strtrim(line, "\n");
+		free(line);
+		return (s);
+	}
+	return (NULL);
+}
+
+void get_map_cols(t_map *map, int fd)
+{
+	char *row;
+
+	row = gnl_wo_nl(fd);
+	map->cols = count_cols(row);
+	free(row);
+
+}
+
+void get_map_rows(t_map *map, int fd)
+{
+	unsigned int nrows;
+	char *row;
+
+	nrows = 1;
+	row = gnl_wo_nl(fd);
+	while (row)
+	{
+		if (count_cols(row) != map->cols)
+		{
+			free(row);
+			row = gnl_wo_nl(fd);
+			while (row)
+			{
+				free(row);
+				row = gnl_wo_nl(fd);
+			}
+			exit(MAP_DIM_ERROR);
+		}
+		nrows++;
+		free(row);
+		row = gnl_wo_nl(fd);
+	}
+	map->rows = nrows;
+}
+
 void	get_map_dimensions(t_map *map, char *filename)
 {
 	int					fd;
-	char				*row;
-	unsigned int		nrows;
 
 	fd = open(filename, O_RDONLY);
-	row = get_next_line(fd);
-	map->cols = count_word(row, ' ');
-	free(row);
-	nrows = 1;
-	row = get_next_line(fd);
-	while (row)
-	{
-		nrows++;
-		free(row);
-		row = get_next_line(fd);
-	}
-	map->rows = nrows;
+	if (fd < 3)
+		exit(FILDE_ERROR);
+	get_map_cols(map, fd);
+	get_map_rows(map, fd);
 	map->points_count = map->rows * map->cols;
 	close(fd);
 }
@@ -63,7 +114,6 @@ void	get_map_data(t_map *map, char *filename)
 	char				*line_content;
 	char				**split_line;
 
-	alloc_map_data(map);
 	fd = open(filename, O_RDONLY);
 	line = 0;
 	while (line < map->rows)

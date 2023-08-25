@@ -34,10 +34,10 @@ fclean: clean
 re: fclean $(NAME)
 
 compile_gdb:
-	$(CC) $(FLAGS) $(SRC_FILES) -g3 -o test.out $(OTHER_LIBS) -Llibft -l:libft.a
+	$(CC) $(FLAGS) $(SRC_FILES) libft/*.c -gdwarf-4 -o test.out $(OTHER_LIBS) -Llibft -l:libft.a
 
 test: compile_gdb
 	gdb --args test.out maps/test_maps/42.fdf
 
 leak: compile_gdb
-	valgrind --leak-check=full ./test.out maps/test_maps/42.fdf
+	valgrind --leak-check=full --show-leak-kinds=all ./test.out maps/test_maps/42.fdf

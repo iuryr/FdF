@@ -22,11 +22,13 @@
 # include <X11/X.h> //macros com definição de events e masks
 
 # define SYS_ERROR 1
+# define FILDE_ERROR 11
 # define MLX_INIT_ERROR 21
 # define MLX_WIN_ERROR 22
 # define ARGC_ERROR 3
 # define IMG_INIT_ERROR 4
 # define PTS_INIT_ERROR 5
+# define MAP_DIM_ERROR 6
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
