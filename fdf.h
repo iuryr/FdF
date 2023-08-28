@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/28 15:42:45 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:19:53 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	get_map_rows(t_map *map, int fd);
 /* Geometry functions*/
 void	alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
 void	scale(t_meta *meta, int scale);
+void	rotation_45dl(t_ptmatrix *pt_matrix);
 
 /* Drawing functions */
 void	img_pix_put(t_img *img, int x, int y, int color);

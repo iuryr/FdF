@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 15:45:09 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:20:37 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char *argv[])
 	alloc_ptmatrix_data(&meta.pt_matrix);
 	system_init(&meta);
 	scale(&meta, 20);
+	rotation_45dl(&meta.pt_matrix);
 	img_init(&meta);
 	mlx_loop_hook(meta.mlx_ptr, &render, &meta);
 	mlx_hook(meta.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &meta);
