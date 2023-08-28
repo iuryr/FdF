@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/24 13:55:15 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:33:36 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	load_map(t_meta *meta, char *filename);
 void	get_map_dimensions(t_map *map, char *filename);
 void	alloc_map_data(t_map *map);
 void	get_map_data(t_map *map, char *filename);
+void	get_map_cols(t_map *map, int fd);
+void	get_map_rows(t_map *map, int fd);
 
 /* Geometry functions*/
 void	alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
@@ -104,6 +106,9 @@ void	scale(t_meta *meta, int scale);
 
 /* Drawing functions */
 void	img_pix_put(t_img *img, int x, int y, int color);
+void	draw_line(t_point start, t_point end, int color, t_img *img);
+void	draw_hline(t_point start, t_point end, int color, t_img *img);
+void	draw_vline(t_point start, t_point end, int color, t_img *img);
 
 /* Rendering Functions */
 int		render(t_meta *meta);
