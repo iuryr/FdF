@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/28 13:33:36 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:42:45 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	img_pix_put(t_img *img, int x, int y, int color);
 void	draw_line(t_point start, t_point end, int color, t_img *img);
 void	draw_hline(t_point start, t_point end, int color, t_img *img);
 void	draw_vline(t_point start, t_point end, int color, t_img *img);
+void	draw_dline(t_point start, t_point end, int color, t_img *img);
 
 /* Rendering Functions */
 int		render(t_meta *meta);
@@ -117,5 +118,8 @@ void	render_points(t_meta *meta, int color);
 
 /* Key pressing & releasing*/
 int		handle_keypress(int keysym, t_meta *meta);
+
+/* general utils */
+unsigned int	ft_abs(int number);
 
 #endif //_FDF_H_

@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:44:52 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/28 13:03:30 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:55:15 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	draw_line(t_point start, t_point end, int color, t_img *img)
 		draw_hline(start, end, color, img);
 	if (dy == 0 & dx != 0)
 		draw_vline(start, end, color, img);
+	if (ft_abs(slope) == 1)
+		draw_dline(start, end, color, img);
 }
 
 void	draw_hline(t_point start, t_point end, int color, t_img *img)
@@ -73,4 +75,29 @@ void	draw_vline(t_point start, t_point end, int color, t_img *img)
 		while (i >= end.y)
 			img_pix_put(img, start.y, i--, color);
 	}
+}
+
+void	draw_dline(t_point start, t_point end, int color, t_img *img)
+{
+	int	dx;
+	int	dy;
+	int	i;
+	int	j;
+
+	dx = end.x - start.x;
+	dy = end.y - start.y;
+	i = start.x;
+	j = start.y;
+	if (dy > 0 & dx > 0)
+		while (i != end.x)
+			img_pix_put(img, i++, j++, color);
+	if (dy < 0 & dx < 0)
+		while (i != end.x)
+			img_pix_put(img, i--, j--, color);
+	if (dx / dy == -1 && dx > dy)
+		while (i != end.x)
+			img_pix_put(img, i++, j--, color);
+	if (dx / dy == -1 && dx < dy)
+		while (i != end.x)
+			img_pix_put(img, i--, j++, color);
 }

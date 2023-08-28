@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:46:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/28 13:23:45 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:58:32 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	render(t_meta *meta)
 	if (meta->win_ptr == NULL)
 		return (-1);
 	render_bg(meta->img, WHITE_PIXEL);
-	render_points(meta, BLUE_PIXEL);
+	// render_points(meta, BLUE_PIXEL);
 	render_lines(&meta->pt_matrix, GREEN_PIXEL, meta->img);
 	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->img->mlx_img,
 		0, 0);

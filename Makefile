@@ -10,6 +10,7 @@ OTHER_LIBS = -lX11 -lXext -lmlx -lm
 SRC_FILES = main.c \
 			init.c \
 			draw.c \
+			draw_utils.c \
 			render.c \
 			keys.c \
 			geometry.c \
