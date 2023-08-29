@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/28 16:19:53 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:17:54 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,16 @@ typedef struct s_ptmatrix
 	t_point			**data;
 }	t_ptmatrix;
 
+typedef struct s_draw_info
+{
+	t_point	start;
+	t_point	end;
+	int		dx;
+	int		dy;
+	int		color;
+	float	slope;
+}	t_draw_info;
+
 typedef struct s_meta
 {
 	void		*mlx_ptr;
@@ -108,9 +118,13 @@ void	rotation_45dl(t_ptmatrix *pt_matrix);
 /* Drawing functions */
 void	img_pix_put(t_img *img, int x, int y, int color);
 void	draw_line(t_point start, t_point end, int color, t_img *img);
-void	draw_hline(t_point start, t_point end, int color, t_img *img);
-void	draw_vline(t_point start, t_point end, int color, t_img *img);
-void	draw_dline(t_point start, t_point end, int color, t_img *img);
+void	draw_hline(t_draw_info info, t_img *img);
+void	draw_vline(t_draw_info info, t_img *img);
+void	draw_dline(t_draw_info info, t_img *img);
+
+/* Draw utils */
+void	init_draw_info(t_draw_info *info, t_point start, t_point end, int color)
+;
 
 /* Rendering Functions */
 int		render(t_meta *meta);
