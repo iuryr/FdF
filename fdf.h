@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/29 14:17:54 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:20:07 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	get_map_rows(t_map *map, int fd);
 void	alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
 void	scale(t_meta *meta, int scale);
 void	rotation_45dl(t_ptmatrix *pt_matrix);
+void	to_iso(t_ptmatrix *pt_matrix);
 
 /* Drawing functions */
 void	img_pix_put(t_img *img, int x, int y, int color);
@@ -121,6 +122,12 @@ void	draw_line(t_point start, t_point end, int color, t_img *img);
 void	draw_hline(t_draw_info info, t_img *img);
 void	draw_vline(t_draw_info info, t_img *img);
 void	draw_dline(t_draw_info info, t_img *img);
+void	draw_bres_low(t_draw_info info, t_img *img);
+void	draw_samplex_s2e(t_draw_info info, t_img *img);
+void	draw_samplex_e2s(t_draw_info info, t_img *img);
+void	draw_bres_high(t_draw_info info, t_img *img);
+void	draw_sampley_s2e(t_draw_info info, t_img *img);
+void	draw_sampley_e2s(t_draw_info info, t_img *img);
 
 /* Draw utils */
 void	init_draw_info(t_draw_info *info, t_point start, t_point end, int color)

@@ -15,7 +15,8 @@ SRC_FILES = main.c \
 			keys.c \
 			geometry.c \
 			00_parsemap.c \
-			00_parsemap_utils.c
+			00_parsemap_utils.c \
+			02_projection.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

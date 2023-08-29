@@ -6,33 +6,31 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:22:08 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/22 15:22:27 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:18:51 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	to_iso(t_map *map, t_point *proj_point_array)
+void	to_iso(t_ptmatrix *pt_matrix)
 {
-	unsigned int	index;
 	unsigned int	i;
 	unsigned int	j;
+	int x;
+	int y;
 
-	index = 0;
 	i = 0;
-	while (index < map->points_count)
+	while(i < pt_matrix->rows)
 	{
-		while(i < map->rows)
+		j = 0;
+		while (j < pt_matrix->cols)
 		{
-			j = 0;
-			while (j < map->cols)
-			{
-				proj_point_array[index].x = 1 / sqrt(2) * (i - map->data[i][j]);
-				proj_point_array[index].y =  i - 2*j + map->data[i][j];
-				index++;
-				j++;
-			}
-			i++;
+			x = 1 / sqrt(2) * (pt_matrix->data[i][j].x - pt_matrix->data[i][j].z);
+			y =  pt_matrix->data[i][j].x - 2*pt_matrix->data[i][j].y + pt_matrix->data[i][j].z;
+			pt_matrix->data[i][j].x = x;
+			pt_matrix->data[i][j].y = y;
+			j++;
 		}
+		i++;
 	}
 }
