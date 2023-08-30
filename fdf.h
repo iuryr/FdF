@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/29 15:20:07 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:47:45 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,17 @@ typedef struct s_draw_info
 	float	slope;
 }	t_draw_info;
 
+typedef struct s_window
+{
+	void			*win_ptr;
+	unsigned int	width;
+	unsigned int	height;
+}	t_window;
+
 typedef struct s_meta
 {
 	void		*mlx_ptr;
-	void		*win_ptr;
+	t_window	window;
 	t_img		*img;
 	t_map		map;
 	t_ptmatrix	pt_matrix;
