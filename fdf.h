@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/30 12:47:45 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:07:21 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,17 @@ typedef struct s_draw_info
 	float	slope;
 }	t_draw_info;
 
-typedef struct s_window
-{
-	void			*win_ptr;
-	unsigned int	width;
-	unsigned int	height;
-}	t_window;
+// typedef struct s_window
+// {
+// 	void			*win_ptr;
+// 	unsigned int	width;
+// 	unsigned int	height;
+// }	t_window;
 
 typedef struct s_meta
 {
 	void		*mlx_ptr;
-	t_window	window;
+	void		*win_ptr;
 	t_img		*img;
 	t_map		map;
 	t_ptmatrix	pt_matrix;
@@ -119,9 +119,11 @@ void	get_map_rows(t_map *map, int fd);
 
 /* Geometry functions*/
 void	alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
-void	scale(t_meta *meta, int scale);
+void	scale(t_meta *meta, int scale); //candidata a ser limada
 void	rotation_45dl(t_ptmatrix *pt_matrix);
 void	to_iso(t_ptmatrix *pt_matrix);
+int		determine_scale(t_map map);
+void	load_points(t_meta *meta);
 
 /* Drawing functions */
 void	img_pix_put(t_img *img, int x, int y, int color);
