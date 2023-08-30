@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/30 15:04:46 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:54:25 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		exit(ARGC_ERROR);
 	load_map(&meta, argv[1]);
-	pt_matrix_init(&meta);
-	alloc_ptmatrix_data(&meta.pt_matrix);
-	load_points(&meta);
+	load_pt_matrix(&meta);
 	system_init(&meta);
 	// scale(&meta, 20);
 	// rotation_45dl(&meta.pt_matrix);

@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:04:15 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/30 15:07:40 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:04:52 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	system_init(t_meta *meta)
 	if (meta->mlx_ptr == NULL)
 		exit(MLX_INIT_ERROR);
 	meta->win_ptr = mlx_new_window(meta->mlx_ptr, WINDOW_WIDTH,
-		WINDOW_HEIGHT, "FdF - iusantos");
+			WINDOW_HEIGHT, "FdF - iusantos");
 	if (meta->win_ptr == NULL)
 	{
 		free(meta->mlx_ptr);
@@ -41,10 +41,4 @@ void	img_init(t_meta *meta)
 			WINDOW_HEIGHT);
 	meta->img->addr = mlx_get_data_addr(meta->img->mlx_img, &meta->img->bpp,
 			&meta->img->line_len, &meta->img->endian);
-}
-
-void	pt_matrix_init(t_meta *meta)
-{
-	meta->pt_matrix.rows = meta->map.rows;
-	meta->pt_matrix.cols = meta->map.cols;
 }
