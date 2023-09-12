@@ -17,16 +17,18 @@ void	draw_line(t_point start, t_point end, int color, t_img *img)
 	t_draw_info	info;
 
 	init_draw_info(&info, start, end, color);
-	if (info.dx == 0 & info.dy != 0)
-		draw_hline(info, img);
-	else if (info.dy == 0 & info.dx != 0)
-		draw_vline(info, img);
-	else if (ft_abs(info.slope) == 1)
-		draw_dline(info, img);
-	else if (ft_abs(info.dx) > ft_abs(info.dy))
-	 	draw_bres_low(info, img);
-	else if (ft_abs(info.dx) < ft_abs(info.dy))
-		draw_bres_high(info, img);
+	if (ft_abs(info.dy) >= ft_abs(info.dx))
+	 	draw_bres_high(info, img);
+	else if (ft_abs(info.dx) > ft_abs(info.dy)) 
+		draw_bres_low(info, img);
+	// if (info.dx == 0 && info.dy != 0)
+	// 	draw_hline(info, img);
+	// else if (info.dy == 0 && info.dx != 0)
+	// 	draw_vline(info, img);
+	// else if (ft_abs(info.dy / info.dx) == 1)
+	// 	draw_dline(info, img);
+	// else
+	// 	img_pix_put(img, start.y, start.x, color);
 }
 
 void	draw_hline(t_draw_info info, t_img *img)
@@ -72,18 +74,18 @@ void	draw_dline(t_draw_info info, t_img *img)
 
 	i = info.start.x;
 	j = info.start.y;
-	if (info.dy > 0 & info.dx > 0)
-		while (i != info.end.x)
-			img_pix_put(img, i++, j++, info.color);
-	if (info.dy < 0 & info.dx < 0)
-		while (i != info.end.x)
-			img_pix_put(img, i--, j--, info.color);
-	if (info.dx / info.dy == -1 && info.dx > info.dy)
-		while (i != info.end.x)
-			img_pix_put(img, i++, j--, info.color);
-	if (info.dx / info.dy == -1 && info.dx < info.dy)
-		while (i != info.end.x)
-			img_pix_put(img, i--, j++, info.color);
+	if (info.dy > 0 && info.dx > 0)
+		while (i <= info.end.x)
+			img_pix_put(img, j++, i++, info.color);
+	else if (info.dy < 0 && info.dx < 0)
+		while (i >= info.end.x)
+			img_pix_put(img, j--, i--, info.color);
+	else if (info.dx > info.dy)
+		while (i <= info.end.x)
+			img_pix_put(img, j--, i++, info.color);
+	else if (info.dx < info.dy)
+		while (i >= info.end.x)
+			img_pix_put(img, j++, i--, info.color);
 }
 
 void	draw_bres_low(t_draw_info info, t_img *img)
@@ -108,9 +110,9 @@ void	draw_samplex_s2e(t_draw_info info, t_img *img)
 		info.dy = -1 * info.dy;
 	}
 	p = 2 * info.dy - info.dx;
-	while (info.start.x++ < info.end.x)
+	while (info.start.x <= info.end.x)
 	{
-		img_pix_put(img, info.start.x, info.start.y, info.color);
+		img_pix_put(img, info.start.y, info.start.x, info.color);
 		if (p > 0)
 		{
 			info.start.y = info.start.y + yi;
@@ -118,6 +120,7 @@ void	draw_samplex_s2e(t_draw_info info, t_img *img)
 		}
 		else
 			p = p + 2 * info.dy;
+		info.start.x++;
 	}
 }
 
@@ -133,17 +136,18 @@ void	draw_samplex_e2s(t_draw_info info, t_img *img)
 		info.dy = -1 * info.dy;
 	}
 	p = 2 * info.dy - info.dx;
-	while (info.end.x++ < info.start.x)
+	while (info.end.x <= info.start.x)
 	{
-		img_pix_put(img, info.end.x, info.start.y, info.color);
+		img_pix_put(img, info.end.y, info.end.x, info.color);
 		if (p > 0)
 		{
-			info.start.y = info.start.y + yi;
+			info.end.y = info.end.y + yi;
 			p = p + 2 * (info.dy - info.dx);
 		}
 		else
 			p = p + 2 * info.dy;
 	}
+	info.end.x++;
 
 }
 
@@ -169,9 +173,9 @@ void	draw_sampley_s2e(t_draw_info info, t_img *img)
 		info.dx = -1 * info.dx;
 	}
 	p = 2 * info.dx - info.dy;
-	while (info.start.y++ < info.end.y)
+	while (info.start.y <= info.end.y)
 	{
-		img_pix_put(img, info.start.x, info.start.y, info.color);
+		img_pix_put(img, info.start.y, info.start.x, info.color);
 		if (p > 0)
 		{
 			info.start.x = info.start.x + xi;
@@ -179,6 +183,7 @@ void	draw_sampley_s2e(t_draw_info info, t_img *img)
 		}
 		else
 			p = p + 2 * info.dx;
+		info.start.y++;
 	}
 }
 
@@ -194,15 +199,16 @@ void	draw_sampley_e2s(t_draw_info info, t_img *img)
 		info.dx = -1 * info.dx;
 	}
 	p = 2 * info.dx - info.dy;
-	while (info.end.y++ < info.start.y)
+	while (info.end.y <= info.start.y)
 	{
-		img_pix_put(img, info.end.x, info.start.y, info.color);
+		img_pix_put(img, info.end.y, info.end.x, info.color);
 		if (p > 0)
 		{
-			info.start.x = info.start.x + xi;
+			info.end.x = info.end.x + xi;
 			p = p + 2 * (info.dx - info.dy);
 		}
 		else
 			p = p + 2 * info.dx;
+		info.end.y++;
 	}
 }

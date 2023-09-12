@@ -38,8 +38,8 @@ void	render_points(t_meta *meta, int color)
 		j = 0;
 		while (j < meta->pt_matrix.cols)
 		{
-			img_pix_put(meta->img, meta->pt_matrix.data[i][j].x,
-				meta->pt_matrix.data[i][j].y, color);
+			img_pix_put(meta->img, meta->pt_matrix.data[i][j].y,
+				meta->pt_matrix.data[i][j].x, color);
 			j++;
 		}
 		i++;
@@ -72,13 +72,45 @@ void	render_lines(t_ptmatrix *points, int color, t_img *img)
 	}
 }
 
+
+
+void	update_px_coords(t_ptmatrix *points)
+{
+	unsigned int i;
+	unsigned int j;
+
+	i = 0;
+	while (i < points->rows)
+	{
+		j = 0;
+		while (j < points->cols)
+		{
+			points->data[i][j].x = (int) floor(points->data[i][j].xf);
+			points->data[i][j].y = (int) floor(points->data[i][j].yf);
+			points->data[i][j].z = (int) floor(points->data[i][j].zf);
+			j++;
+		}
+		i++;
+	}
+	update_minmax(points);
+	update_center(points);
+}
+
+void update_img(t_meta *meta)
+{
+	update_px_coords(&meta->pt_matrix);
+	render_bg(meta->img, WHITE_PIXEL);
+	render_lines(&meta->pt_matrix, RED_PIXEL, meta->img);
+	rot_xy_ac(&meta->pt_matrix, -M_PI / 4);
+	update_px_coords(&meta->pt_matrix);
+	render_points(meta, BLUE_PIXEL);
+	render_lines(&meta->pt_matrix, GREEN_PIXEL, meta->img);
+}
+
 int	render(t_meta *meta)
 {
 	if (meta->win_ptr == NULL)
 		return (-1);
-	render_bg(meta->img, WHITE_PIXEL);
-	// render_points(meta, BLUE_PIXEL);
-	render_lines(&meta->pt_matrix, RED_PIXEL, meta->img);
 	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->img->mlx_img,
 		0, 0);
 	return (0);

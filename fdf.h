@@ -37,6 +37,7 @@
 # define GREEN_PIXEL 0x00FF00
 # define WHITE_PIXEL 0xFFFFFF
 # define BLUE_PIXEL 0x0000FF
+# define BLACK_PIXEL 0x000000
 
 typedef struct s_img
 {
@@ -60,12 +61,21 @@ typedef struct s_point
 	int	x;
 	int	y;
 	int	z;
+	double	xf;
+	double	yf;
+	double	zf;
 }	t_point;
 
 typedef struct s_ptmatrix
 {
 	unsigned int	rows;
 	unsigned int	cols;
+	int	x_min;
+	int	x_max;
+	int	y_min;
+	int	y_max;
+	int	x_c;
+	int	y_c;
 	t_point			**data;
 }	t_ptmatrix;
 
@@ -107,6 +117,7 @@ typedef struct s_line
 /* Initialization functions */
 void			system_init(t_meta *meta);
 void			img_init(t_meta *meta);
+void update_img(t_meta *meta);
 
 /* Map parsing functions */
 void			load_map(t_meta *meta, char *filename);
@@ -120,12 +131,17 @@ void			get_map_rows(t_map *map, int fd);
 void			load_pt_matrix(t_meta *meta);
 void			pt_matrix_init(t_meta *meta);
 int				determine_scale(t_map map);
+void	set_minmax(t_ptmatrix *points);
+void	update_minmax(t_ptmatrix *points);
+void	update_center(t_ptmatrix *points);
+void	set_float_coords(t_ptmatrix *points);
 void			load_points(t_meta *meta);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
 void			scale(t_meta *meta, int scale); //candidata a ser limada
-void			rotation_45dl(t_ptmatrix *pt_matrix);
+void	rot_xy_ac(t_ptmatrix *points, float theta);
+void			rotation_45dl(t_ptmatrix *pt_matrix); //candidata a ser limada
 void			to_iso(t_ptmatrix *pt_matrix);
 
 /* Drawing functions */
@@ -149,6 +165,7 @@ void			init_draw_info(t_draw_info *info, t_point start,
 int				render(t_meta *meta);
 void			render_bg(t_img *img, int color);
 void			render_points(t_meta *meta, int color);
+void	update_px_coords(t_ptmatrix *points);
 
 /* Key pressing & releasing*/
 int				handle_keypress(int keysym, t_meta *meta);
