@@ -19,6 +19,18 @@ SRC_FILES = main.c \
 			01_load_points.c \
 			02_projection.c
 
+BRES_FILES = bres_test.c \
+			 init.c \
+			 draw.c \
+			 draw_utils.c \
+			 render.c \
+			 keys.c \
+			 geometry.c \
+			 00_parsemap.c \
+			 00_parsemap_utils.c \
+			 01_load_points.c \
+			 02_projection.c
+
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 all: $(NAME)
@@ -37,6 +49,7 @@ fclean: clean
 
 re: fclean $(NAME)
 
+#########Regras de teste
 compile_gdb:
 	$(CC) $(FLAGS) $(SRC_FILES) libft/*.c -gdwarf-4 -o test.out $(OTHER_LIBS) -Llibft -l:libft.a
 
@@ -45,3 +58,10 @@ test: compile_gdb
 
 leak: compile_gdb
 	valgrind --leak-check=full --show-leak-kinds=all ./test.out maps/test_maps/42.fdf
+
+######### Testando algoritmo de bresenham
+compile_bres:
+	$(CC) $(FLAGS) $(BRES_FILES) libft/*.c -gdwarf-4 -o test.out $(OTHER_LIBS) -Llibft -l:libft.a
+
+bresenham: compile_bres
+	./test.out

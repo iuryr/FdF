@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/30 16:03:55 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:34:23 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,10 @@ void			draw_samplex_e2s(t_draw_info info, t_img *img);
 void			draw_bres_high(t_draw_info info, t_img *img);
 void			draw_sampley_s2e(t_draw_info info, t_img *img);
 void			draw_sampley_e2s(t_draw_info info, t_img *img);
+
+/* teste - apagar ou integrar */
+void	draw_line_low(t_point start, t_point end, t_draw_info info, t_img *img);
+
 
 /* Draw utils */
 void			init_draw_info(t_draw_info *info, t_point start,
