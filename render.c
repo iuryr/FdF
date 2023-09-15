@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:46:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 12:40:45 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:01:44 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,13 @@ void	update_px_coords(t_ptmatrix *points)
 void update_img(t_meta *meta)
 {
 	render_bg(meta->img, WHITE_PIXEL);
+	to_iso(&meta->pt_matrix);
+	update_px_coords(&meta->pt_matrix);
 	render_points(meta, BLUE_PIXEL);
 	render_lines(&meta->pt_matrix, RED_PIXEL, meta->img);
-	rot_xy_ac(&meta->pt_matrix, (M_PI  / 4) );
-	update_px_coords(&meta->pt_matrix);
-	render_lines(&meta->pt_matrix, GREEN_PIXEL, meta->img);
-	render_points(meta, BLUE_PIXEL);
+	// rot_xy_ac(&meta->pt_matrix, (M_PI  / 4) );
+	// render_lines(&meta->pt_matrix, GREEN_PIXEL, meta->img);
+	// render_points(meta, BLUE_PIXEL);
 }
 
 int	render(t_meta *meta)
@@ -112,6 +113,6 @@ int	render(t_meta *meta)
 	if (meta->win_ptr == NULL)
 		return (-1);
 	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->img->mlx_img,
-		0, 0);
+		50, 50);
 	return (0);
 }

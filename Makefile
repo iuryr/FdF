@@ -14,9 +14,11 @@ SRC_FILES = main.c \
 			render.c \
 			keys.c \
 			geometry.c \
+			geometry_utils.c \
 			00_parsemap.c \
 			00_parsemap_utils.c \
 			01_load_points.c \
+			01_load_points_utils.c \
 			02_projection.c
 
 BRES_FILES = bres_test.c \

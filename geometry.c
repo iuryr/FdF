@@ -6,53 +6,26 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:30 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/30 15:49:53 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:54:14 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	scale(t_meta *meta, int scale)
+void	scale(t_ptmatrix pt_matrix, int scale)
 {
 	unsigned int	i;
 	unsigned int	j;
 
 	i = 0;
-	while (i < meta->pt_matrix.rows)
+	while (i < pt_matrix.rows)
 	{
 		j = 0;
-		while (j < meta->pt_matrix.cols)
+		while (j < pt_matrix.cols)
 		{
-			meta->pt_matrix.data[i][j].x = i * scale;
-			meta->pt_matrix.data[i][j].y = j * scale;
-			meta->pt_matrix.data[i][j].z = meta->map.data[i][j] * scale;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	rotation_45dl(t_ptmatrix *pt_matrix)
-{
-	unsigned int	i;
-	unsigned int	j;
-	float				x;
-	float				y;
-	double			theta;
-
-	theta = M_PI / 6;
-	i = 0;
-	while (i < pt_matrix->rows)
-	{
-		j = 0;
-		while (j < pt_matrix->cols)
-		{
-			x = (pt_matrix->data[i][j].x - pt_matrix->x_c) * cos(theta)
-				- (pt_matrix->data[i][j].y - pt_matrix->y_c) * sin(theta);
-			y = (pt_matrix->data[i][j].x - pt_matrix->x_c) * sin(theta)
-				+ (pt_matrix->data[i][j].y - pt_matrix->y_c) * cos(theta);
-			pt_matrix->data[i][j].xf = x + pt_matrix->x_c;
-			pt_matrix->data[i][j].yf = y + pt_matrix->y_c;
+			pt_matrix.data[i][j].x = pt_matrix.data[i][j].x * scale;
+			pt_matrix.data[i][j].y = pt_matrix.data[i][j].y * scale;
+			pt_matrix.data[i][j].z = pt_matrix.data[i][j].z * scale;
 			j++;
 		}
 		i++;

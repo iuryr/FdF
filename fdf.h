@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 10:57:28 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:44:39 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ typedef struct s_map
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
+	int		x;
+	int		y;
+	int		z;
 	double	xf;
 	double	yf;
 	double	zf;
@@ -70,14 +70,15 @@ typedef struct s_ptmatrix
 {
 	unsigned int	rows;
 	unsigned int	cols;
-	int	x_min;
-	int	x_max;
-	int	y_min;
-	int	y_max;
-	int	x_c;
-	int	y_c;
+	int				x_min;
+	int				x_max;
+	int				y_min;
+	int				y_max;
+	int				x_c;
+	int				y_c;
 	t_point			**data;
 }	t_ptmatrix;
+
 
 typedef struct s_draw_info
 {
@@ -89,13 +90,6 @@ typedef struct s_draw_info
 	float	slope;
 }	t_draw_info;
 
-// typedef struct s_window
-// {
-// 	void			*win_ptr;
-// 	unsigned int	width;
-// 	unsigned int	height;
-// }	t_window;
-
 typedef struct s_meta
 {
 	void		*mlx_ptr;
@@ -103,6 +97,7 @@ typedef struct s_meta
 	t_img		*img;
 	t_map		map;
 	t_ptmatrix	pt_matrix;
+	t_ptmatrix	render_input;
 }	t_meta;
 
 typedef struct s_line
@@ -117,7 +112,8 @@ typedef struct s_line
 /* Initialization functions */
 void			system_init(t_meta *meta);
 void			img_init(t_meta *meta);
-void update_img(t_meta *meta);
+//candidata a ser limada
+void			update_img(t_meta *meta);
 
 /* Map parsing functions */
 void			load_map(t_meta *meta, char *filename);
@@ -131,45 +127,39 @@ void			get_map_rows(t_map *map, int fd);
 void			load_pt_matrix(t_meta *meta);
 void			pt_matrix_init(t_meta *meta);
 int				determine_scale(t_map map);
-void	set_minmax(t_ptmatrix *points);
-void	update_minmax(t_ptmatrix *points);
-void	update_center(t_ptmatrix *points);
-void	set_float_coords(t_ptmatrix *points);
+void			set_minmax(t_ptmatrix *points);
+void			update_minmax(t_ptmatrix *points);
+void			update_center(t_ptmatrix *points);
+void			set_float_coords(t_ptmatrix *points);
 void			load_points(t_meta *meta);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
 void			scale(t_meta *meta, int scale); //candidata a ser limada
-void	rot_xy_ac(t_ptmatrix *points, float theta);
+void			rot_xy_ac(t_ptmatrix *points, float theta);
 void			rotation_45dl(t_ptmatrix *pt_matrix); //candidata a ser limada
 void			to_iso(t_ptmatrix *pt_matrix);
 
 /* Drawing functions */
 void			img_pix_put(t_img *img, int x, int y, int color);
 void			draw_line(t_point start, t_point end, int color, t_img *img);
-void			draw_hline(t_draw_info info, t_img *img);
-void			draw_vline(t_draw_info info, t_img *img);
-void			draw_dline(t_draw_info info, t_img *img);
-void			draw_bres_low(t_point start, t_point end, int color, t_img *img);
+void			draw_bres_low(t_point start, t_point end,
+					int color, t_img *img);
 void			draw_samplex(t_draw_info info, t_img *img);
-void	draw_bres_high(t_point start, t_point end, int color, t_img *img);
-void	draw_sampley(t_draw_info info, t_img *img);
-// void			draw_sampley_s2e(t_draw_info info, t_img *img);
-// void			draw_sampley_e2s(t_draw_info info, t_img *img);
-
-/* teste - apagar ou integrar */
-void	draw_line_low(t_point start, t_point end, t_draw_info info, t_img *img);
-
+void			draw_bres_high(t_point start, t_point end,
+					int color, t_img *img);
+void			draw_sampley(t_draw_info info, t_img *img);
 
 /* Draw utils */
 void			init_draw_info(t_draw_info *info, t_point start,
 					t_point end, int color);
+void			to_render_input(t_ptmatrix pt_matrix, t_ptmatrix *to_render);
 
 /* Rendering Functions */
 int				render(t_meta *meta);
 void			render_bg(t_img *img, int color);
 void			render_points(t_meta *meta, int color);
-void	update_px_coords(t_ptmatrix *points);
+void			update_px_coords(t_ptmatrix *points);
 
 /* Key pressing & releasing*/
 int				handle_keypress(int keysym, t_meta *meta);
