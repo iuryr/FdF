@@ -29,8 +29,8 @@ int main(void)
 	t_point	p9 = (t_point){30,160,0,30,160,0}; //diagonal positiva IF
 	t_point	p10 = (t_point){70,200,0,70,200,0};
 
-	t_point	p11 = (t_point){270,200,0,270,200,0}; //diagonal positiva FI
-	t_point	p12 = (t_point){220,150,0,220,150,0};
+	t_point	p11 = (t_point){260,200,0,260,200,0}; //diagonal positiva FI
+	t_point	p12 = (t_point){220,160,0,220,160,0};
 
 	t_point	p13 = (t_point){30,270,0,30,270,0}; //diagonal negativa IF
 	t_point	p14 = (t_point){80,220,0,80,220,0};
@@ -54,7 +54,7 @@ int main(void)
 	img_init(&meta);
 	render_bg(meta.img, WHITE_PIXEL);
 
-	draw_line(p1, p2, BLUE_PIXEL, meta.img);
+	draw_line(p1, p2, RED_PIXEL, meta.img);
 	draw_line(p3, p4, RED_PIXEL, meta.img);
 	draw_line(p5, p6, RED_PIXEL, meta.img);
 	draw_line(p7, p8, RED_PIXEL, meta.img);

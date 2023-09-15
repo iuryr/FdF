@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:48:38 by iusantos          #+#    #+#             */
-/*   Updated: 2023/08/30 16:05:36 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:38:49 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void	load_points(t_meta *meta)
 		j = 0;
 		while (j < meta->pt_matrix.cols)
 		{
-			meta->pt_matrix.data[i][j].x = i * determine_scale(meta->map);
-			meta->pt_matrix.data[i][j].y = j * determine_scale(meta->map);
+			meta->pt_matrix.data[i][j].x = j * determine_scale(meta->map);
+			meta->pt_matrix.data[i][j].y = i * determine_scale(meta->map);
 			meta->pt_matrix.data[i][j].z = meta->map.data[i][j];
 			j++;
 		}
