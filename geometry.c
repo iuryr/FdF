@@ -12,20 +12,40 @@
 
 #include "fdf.h"
 
-void	scale(t_ptmatrix pt_matrix, int scale)
+void	scale(t_ptmatrix *pt_matrix, int scale)
 {
 	unsigned int	i;
 	unsigned int	j;
 
 	i = 0;
-	while (i < pt_matrix.rows)
+	while (i < pt_matrix->rows)
 	{
 		j = 0;
-		while (j < pt_matrix.cols)
+		while (j < pt_matrix->cols)
 		{
-			pt_matrix.data[i][j].x = pt_matrix.data[i][j].x * scale;
-			pt_matrix.data[i][j].y = pt_matrix.data[i][j].y * scale;
-			pt_matrix.data[i][j].z = pt_matrix.data[i][j].z * scale;
+			pt_matrix->data[i][j].xf = pt_matrix->data[i][j].x * scale;
+			pt_matrix->data[i][j].yf = pt_matrix->data[i][j].y * scale;
+			pt_matrix->data[i][j].zf = pt_matrix->data[i][j].z * scale;
+			j++;
+		}
+		i++;
+	}
+	update_px_coords(pt_matrix);
+}
+
+void	center(t_ptmatrix *pt_matrix)
+{
+	unsigned int i;
+	unsigned int j;
+
+	i = 0;
+	while (i < pt_matrix->rows)
+	{
+		j = 0;
+		while (j < pt_matrix->cols)
+		{
+			pt_matrix->data[i][j].x = pt_matrix->data[i][j].x + WINDOW_WIDTH / 2 - pt_matrix->x_c ;
+			pt_matrix->data[i][j].y = pt_matrix->data[i][j].y + WINDOW_HEIGHT / 2 - pt_matrix->y_c;
 			j++;
 		}
 		i++;

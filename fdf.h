@@ -97,7 +97,6 @@ typedef struct s_meta
 	t_img		*img;
 	t_map		map;
 	t_ptmatrix	pt_matrix;
-	t_ptmatrix	render_input;
 }	t_meta;
 
 typedef struct s_line
@@ -135,7 +134,8 @@ void			load_points(t_meta *meta);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
-void			scale(t_meta *meta, int scale); //candidata a ser limada
+void			scale(t_ptmatrix *pt_matrix, int scale); //candidata a ser limada
+void			center(t_ptmatrix *pt_matrix);
 void			rot_xy_ac(t_ptmatrix *points, float theta);
 void			rotation_45dl(t_ptmatrix *pt_matrix); //candidata a ser limada
 void			to_iso(t_ptmatrix *pt_matrix);
@@ -158,7 +158,8 @@ void			to_render_input(t_ptmatrix pt_matrix, t_ptmatrix *to_render);
 /* Rendering Functions */
 int				render(t_meta *meta);
 void			render_bg(t_img *img, int color);
-void			render_points(t_meta *meta, int color);
+void			render_points(t_ptmatrix pt_matrix, int color, t_img *img);
+void			render_lines(t_ptmatrix points, int color, t_img *img);
 void			update_px_coords(t_ptmatrix *points);
 
 /* Key pressing & releasing*/

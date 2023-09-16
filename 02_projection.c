@@ -25,8 +25,8 @@ void	to_iso(t_ptmatrix *pt_matrix)
 		j = 0;
 		while (j < pt_matrix->cols)
 		{
-			x = 1 / sqrt(2) * (pt_matrix->data[i][j].xf + pt_matrix->data[i][j].zf);
-			y =  pt_matrix->data[i][j].xf - 2*pt_matrix->data[i][j].yf - pt_matrix->data[i][j].zf;
+			x = 1 / sqrt(2) * (pt_matrix->data[i][j].xf - pt_matrix->data[i][j].zf);
+			y =  pt_matrix->data[i][j].xf - 2*pt_matrix->data[i][j].yf + pt_matrix->data[i][j].zf;
 			pt_matrix->data[i][j].xf = x;
 			pt_matrix->data[i][j].yf = y;
 			j++;
