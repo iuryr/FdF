@@ -134,7 +134,7 @@ void			load_points(t_meta *meta);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
-void			scale(t_ptmatrix *pt_matrix, int scale); //candidata a ser limada
+void			scale(t_ptmatrix *pt_matrix, float scale);
 void			center(t_ptmatrix *pt_matrix);
 void			rot_xy_ac(t_ptmatrix *points, float theta);
 void			rotation_45dl(t_ptmatrix *pt_matrix); //candidata a ser limada

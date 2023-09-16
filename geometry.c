@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	scale(t_ptmatrix *pt_matrix, int scale)
+void	scale(t_ptmatrix *pt_matrix, float scale)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -23,9 +23,9 @@ void	scale(t_ptmatrix *pt_matrix, int scale)
 		j = 0;
 		while (j < pt_matrix->cols)
 		{
-			pt_matrix->data[i][j].xf = pt_matrix->data[i][j].x * scale;
-			pt_matrix->data[i][j].yf = pt_matrix->data[i][j].y * scale;
-			pt_matrix->data[i][j].zf = pt_matrix->data[i][j].z * scale;
+			pt_matrix->data[i][j].xf = pt_matrix->data[i][j].xf * scale;
+			pt_matrix->data[i][j].yf = pt_matrix->data[i][j].yf * scale;
+			pt_matrix->data[i][j].zf = pt_matrix->data[i][j].zf * scale;
 			j++;
 		}
 		i++;

@@ -102,7 +102,8 @@ void update_img(t_meta *meta)
 
 	to_render = meta->pt_matrix;
 	render_bg(meta->img, WHITE_PIXEL);
-	scale(&to_render, 10);
+	scale(&to_render, 20);
+	// scale(&to_render, .5);
 	center(&to_render);
 	render_points(to_render, BLUE_PIXEL, meta->img);
 	render_lines(to_render, RED_PIXEL, meta->img);
