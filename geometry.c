@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:30 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 14:54:14 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:00:18 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	rot_az_ac(t_ptmatrix *points, float theta)
 	float		yt;
 
 	init_trig(&trig, theta);
-	center_to_og(points);
 	i = 0;
 	while (i < points->rows)
 	{
@@ -127,8 +126,6 @@ void	rot_az_ac(t_ptmatrix *points, float theta)
 		i++;
 	}
 	update_int_coords(points);
-	og_to_center(points);
-	update_px_coords(points);
 }
 
 //rotate figure through xz theta radians clockwise around its own center
@@ -141,7 +138,6 @@ void	rot_ay_ac(t_ptmatrix *points, float theta)
 	float		zt;
 
 	init_trig(&trig, theta);
-	center_to_og(points);
 	i = 0;
 	while (i < points->rows)
 	{
@@ -157,8 +153,6 @@ void	rot_ay_ac(t_ptmatrix *points, float theta)
 		i++;
 	}
 	update_int_coords(points);
-	og_to_center(points);
-	update_px_coords(points);
 }
 
 //rotate figure through yz theta radians clockwise around its own center
@@ -171,7 +165,6 @@ void	rot_ax_ac(t_ptmatrix *points, float theta)
 	float		zt;
 
 	init_trig(&trig, theta);
-	center_to_og(points);
 	i = 0;
 	while (i < points->rows)
 	{
@@ -187,6 +180,4 @@ void	rot_ax_ac(t_ptmatrix *points, float theta)
 		i++;
 	}
 	update_int_coords(points);
-	og_to_center(points);
-	update_px_coords(points);
 }

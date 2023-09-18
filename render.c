@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:46:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/18 14:48:48 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:57:14 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,11 @@ void update_img(t_meta *meta)
 
 	to_render = meta->pt_matrix;
 	render_bg(meta->img, BLACK_PIXEL);
+	center_to_og(&to_render);
 	to_iso(&to_render);
-	scale(&to_render, 20);
+	og_to_center(&to_render);
 	center(&to_render);
+	scale(&to_render, determine_scale(meta->map));
 	render_lines(to_render, WHITE_PIXEL, meta->img);
 	// update_px_coords(&to_render);
 	// rot_xy_ac(&meta->pt_matrix, (M_PI  / 4) );
