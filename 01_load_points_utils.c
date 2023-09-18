@@ -70,3 +70,23 @@ void	set_float_coords(t_ptmatrix *points)
 		i++;
 	}
 }
+
+void	update_int_coords(t_ptmatrix *points)
+{
+	unsigned int i;
+	unsigned int j;
+
+	i = 0;
+	while (i < points->rows)
+	{
+		j = 0;
+		while (j < points->cols)
+		{
+			points->data[i][j].x = (int) roundf(points->data[i][j].xf);
+			points->data[i][j].y = (int) roundf(points->data[i][j].yf);
+			points->data[i][j].z = (int) roundf(points->data[i][j].zf);
+			j++;
+		}
+		i++;
+	}
+}

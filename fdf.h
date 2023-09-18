@@ -39,6 +39,12 @@
 # define BLUE_PIXEL 0x0000FF
 # define BLACK_PIXEL 0x000000
 
+typedef struct s_trig
+{
+	float	cosa;
+	float	sina;
+}	t_trig;
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -61,9 +67,9 @@ typedef struct s_point
 	int		x;
 	int		y;
 	int		z;
-	double	xf;
-	double	yf;
-	double	zf;
+	float	xf;
+	float	yf;
+	float	zf;
 }	t_point;
 
 typedef struct s_ptmatrix
@@ -78,7 +84,6 @@ typedef struct s_ptmatrix
 	int				y_c;
 	t_point			**data;
 }	t_ptmatrix;
-
 
 typedef struct s_draw_info
 {
@@ -130,13 +135,18 @@ void			set_minmax(t_ptmatrix *points);
 void			update_minmax(t_ptmatrix *points);
 void			update_center(t_ptmatrix *points);
 void			set_float_coords(t_ptmatrix *points);
+void			update_int_coords(t_ptmatrix *points);
 void			load_points(t_meta *meta);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
 void			scale(t_ptmatrix *pt_matrix, float scale);
 void			center(t_ptmatrix *pt_matrix);
-void			rot_xy_ac(t_ptmatrix *points, float theta);
+void			center_to_og(t_ptmatrix *points);
+void			og_to_center(t_ptmatrix *points);
+void			rot_az_ac(t_ptmatrix *points, float theta);
+void			rot_ay_ac(t_ptmatrix *points, float theta);
+void			rot_ax_ac(t_ptmatrix *points, float theta);
 void			rotation_45dl(t_ptmatrix *pt_matrix); //candidata a ser limada
 void			to_iso(t_ptmatrix *pt_matrix);
 
@@ -156,7 +166,7 @@ void			init_draw_info(t_draw_info *info, t_point start,
 void			to_render_input(t_ptmatrix pt_matrix, t_ptmatrix *to_render);
 
 /* Rendering Functions */
-int				render(t_meta *meta);
+int			render(t_meta *meta);
 void			render_bg(t_img *img, int color);
 void			render_points(t_ptmatrix pt_matrix, int color, t_img *img);
 void			render_lines(t_ptmatrix points, int color, t_img *img);

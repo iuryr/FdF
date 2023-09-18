@@ -76,22 +76,7 @@ void	render_lines(t_ptmatrix points, int color, t_img *img)
 
 void	update_px_coords(t_ptmatrix *points)
 {
-	unsigned int i;
-	unsigned int j;
-
-	i = 0;
-	while (i < points->rows)
-	{
-		j = 0;
-		while (j < points->cols)
-		{
-			points->data[i][j].x = (int) floor(points->data[i][j].xf);
-			points->data[i][j].y = (int) floor(points->data[i][j].yf);
-			points->data[i][j].z = (int) floor(points->data[i][j].zf);
-			j++;
-		}
-		i++;
-	}
+	update_int_coords(points);
 	update_minmax(points);
 	update_center(points);
 }
@@ -102,12 +87,12 @@ void update_img(t_meta *meta)
 
 	to_render = meta->pt_matrix;
 	render_bg(meta->img, WHITE_PIXEL);
+	to_iso(&to_render);
 	scale(&to_render, 20);
 	// scale(&to_render, .5);
 	center(&to_render);
 	render_points(to_render, BLUE_PIXEL, meta->img);
 	render_lines(to_render, RED_PIXEL, meta->img);
-	// to_iso(&to_render);
 	// update_px_coords(&to_render);
 	// rot_xy_ac(&meta->pt_matrix, (M_PI  / 4) );
 	// render_lines(&meta->pt_matrix, GREEN_PIXEL, meta->img);

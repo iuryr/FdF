@@ -52,15 +52,10 @@ void	center(t_ptmatrix *pt_matrix)
 	}
 }
 
-//rotate figure through xy theta radians clockwise around its own center
-void	rot_xy_ac(t_ptmatrix *points, float theta)
+void	center_to_og(t_ptmatrix *points)
 {
-	unsigned int i;
-	unsigned int j;
-	double x;
-	double y;
-	double xt;
-	double yt;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
 	while (i < points->rows)
@@ -68,16 +63,130 @@ void	rot_xy_ac(t_ptmatrix *points, float theta)
 		j = 0;
 		while (j < points->cols)
 		{
-			xt = points->data[i][j].xf - points->x_c;
-			yt = points->data[i][j].yf - points->y_c;
-
-			x = (xt * cos(theta))  - (yt * sin(theta));
-			y = (xt * sin(theta))  + (yt * cos(theta));
-
-			points->data[i][j].xf = x + points->x_c;
-			points->data[i][j].yf = y + points->y_c;
+			points->data[i][j].x = points->data[i][j].x - points->x_c;
+			points->data[i][j].xf = points->data[i][j].xf - points->x_c;
+			points->data[i][j].y = points->data[i][j].y - points->y_c;
+			points->data[i][j].yf = points->data[i][j].yf - points->y_c;
 			j++;
 		}
 		i++;
 	}
+}
+
+void	og_to_center(t_ptmatrix *points)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	while (i < points->rows)
+	{
+		j = 0;
+		while (j < points->cols)
+		{
+			points->data[i][j].x = points->data[i][j].x + points->x_c;
+			points->data[i][j].xf = points->data[i][j].xf + points->x_c;
+			points->data[i][j].y = points->data[i][j].y + points->y_c;
+			points->data[i][j].yf = points->data[i][j].yf + points->y_c;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	init_trig(t_trig *angle, float theta)
+{
+	angle->cosa = cos(theta);
+	angle->sina = sin(theta);
+
+}
+
+//rotate figure through xy theta radians clockwise around its own center
+void	rot_az_ac(t_ptmatrix *points, float theta)
+{
+	t_trig		trig;
+	unsigned int	i;
+	unsigned int	j;
+	float		xt;
+	float		yt;
+
+	init_trig(&trig, theta);
+	center_to_og(points);
+	i = 0;
+	while (i < points->rows)
+	{
+		j = 0;
+		while (j < points->cols)
+		{
+			xt = points->data[i][j].xf;
+			yt = points->data[i][j].yf;
+			points->data[i][j].xf = xt * trig.cosa  - yt * trig.sina;
+			points->data[i][j].yf = xt * trig.sina  + yt * trig.cosa;
+			j++;
+		}
+		i++;
+	}
+	update_int_coords(points);
+	og_to_center(points);
+	update_px_coords(points);
+}
+
+//rotate figure through xz theta radians clockwise around its own center
+void	rot_ay_ac(t_ptmatrix *points, float theta)
+{
+	t_trig		trig;
+	unsigned int	i;
+	unsigned int	j;
+	float		xt;
+	float		zt;
+
+	init_trig(&trig, theta);
+	center_to_og(points);
+	i = 0;
+	while (i < points->rows)
+	{
+		j = 0;
+		while (j < points->cols)
+		{
+			xt = points->data[i][j].xf;
+			zt = points->data[i][j].zf;
+			points->data[i][j].xf = xt * trig.cosa  + zt * trig.sina;
+			points->data[i][j].zf = -xt * trig.sina  + zt * trig.cosa;
+			j++;
+		}
+		i++;
+	}
+	update_int_coords(points);
+	og_to_center(points);
+	update_px_coords(points);
+}
+
+//rotate figure through yz theta radians clockwise around its own center
+void	rot_ax_ac(t_ptmatrix *points, float theta)
+{
+	t_trig		trig;
+	unsigned int	i;
+	unsigned int	j;
+	float		yt;
+	float		zt;
+
+	init_trig(&trig, theta);
+	center_to_og(points);
+	i = 0;
+	while (i < points->rows)
+	{
+		j = 0;
+		while (j < points->cols)
+		{
+			yt = points->data[i][j].yf;
+			zt = points->data[i][j].zf;
+			points->data[i][j].yf = yt * trig.cosa  - zt * trig.sina;
+			points->data[i][j].zf = yt * trig.sina  + zt * trig.cosa;
+			j++;
+		}
+		i++;
+	}
+	update_int_coords(points);
+	og_to_center(points);
+	update_px_coords(points);
 }
