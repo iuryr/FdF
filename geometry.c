@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:30 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/18 16:00:18 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:24:43 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	scale(t_ptmatrix *pt_matrix, float scale)
 	unsigned int	i;
 	unsigned int	j;
 
+	determine_scale(pt_matrix);
 	i = 0;
 	while (i < pt_matrix->rows)
 	{
@@ -44,8 +45,8 @@ void	center(t_ptmatrix *pt_matrix)
 		j = 0;
 		while (j < pt_matrix->cols)
 		{
-			pt_matrix->data[i][j].x = pt_matrix->data[i][j].x + WINDOW_WIDTH / 2 - pt_matrix->x_c ;
-			pt_matrix->data[i][j].y = pt_matrix->data[i][j].y + WINDOW_HEIGHT / 2 - pt_matrix->y_c;
+			pt_matrix->data[i][j].x = pt_matrix->data[i][j].x + WINDOW_WIDTH / 2;
+			pt_matrix->data[i][j].y = pt_matrix->data[i][j].y + WINDOW_HEIGHT / 2;
 			j++;
 		}
 		i++;

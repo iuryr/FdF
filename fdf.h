@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 14:44:39 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:28:40 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,15 @@ typedef struct s_ptmatrix
 	unsigned int	cols;
 	int				x_min;
 	int				x_max;
+	int				x_range;
 	int				y_min;
 	int				y_max;
+	int				y_range;
 	int				x_c;
 	int				y_c;
+	int				x_offset;
+	int				y_offset;
+	float			scale;
 	t_point			**data;
 }	t_ptmatrix;
 
@@ -130,7 +135,7 @@ void			get_map_rows(t_map *map, int fd);
 /* Loading points coordinates function */
 void			load_pt_matrix(t_meta *meta);
 void			pt_matrix_init(t_meta *meta);
-int				determine_scale(t_map map);
+void			determine_scale(t_ptmatrix *points);
 void			set_minmax(t_ptmatrix *points);
 void			update_minmax(t_ptmatrix *points);
 void			update_center(t_ptmatrix *points);
@@ -166,11 +171,13 @@ void			init_draw_info(t_draw_info *info, t_point start,
 void			to_render_input(t_ptmatrix pt_matrix, t_ptmatrix *to_render);
 
 /* Rendering Functions */
-int			render(t_meta *meta);
+int				render(t_meta *meta);
 void			render_bg(t_img *img, int color);
-void			render_points(t_ptmatrix pt_matrix, int color, t_img *img);
+void			render_points(t_ptmatrix pt_matrix, int color, t_img *img); //candidata a ser limada
 void			render_lines(t_ptmatrix points, int color, t_img *img);
 void			update_px_coords(t_ptmatrix *points);
+void			determine_range(t_ptmatrix *points);
+void			prepare_render(t_ptmatrix *points);
 
 /* Key pressing & releasing*/
 int				handle_keypress(int keysym, t_meta *meta);
