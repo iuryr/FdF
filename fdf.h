@@ -145,8 +145,8 @@ void			load_points(t_meta *meta);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
-void			scale(t_ptmatrix *pt_matrix, float scale);
-void			center(t_ptmatrix *pt_matrix);
+void			scale(t_ptmatrix *pt_matrix);
+void			center_to_wm(t_ptmatrix *pt_matrix);
 void			center_to_og(t_ptmatrix *points);
 void			og_to_center(t_ptmatrix *points);
 void			rot_az_ac(t_ptmatrix *points, float theta);

@@ -85,18 +85,13 @@ void update_img(t_meta *meta)
 {
 	t_ptmatrix	to_render;
 
-	render_bg(meta->img, BLACK_PIXEL);
 	to_render = meta->pt_matrix;
+	render_bg(meta->img, BLACK_PIXEL);
 	center_to_og(&to_render);
 	to_iso(&to_render);
-	scale(&to_render, to_render.scale);
-	center(&to_render);
-	// prepare_render(&to_render);
+	scale(&to_render);
+	center_to_wm(&to_render);
 	render_lines(to_render, WHITE_PIXEL, meta->img);
-	// update_px_coords(&to_render);
-	// rot_xy_ac(&meta->pt_matrix, (M_PI  / 4) );
-	// render_lines(&meta->pt_matrix, GREEN_PIXEL, meta->img);
-	// render_points(meta, BLUE_PIXEL);
 }
 
 int	render(t_meta *meta)

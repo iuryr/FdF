@@ -16,4 +16,5 @@ void	to_iso(t_ptmatrix *pt_matrix)
 {
 	rot_az_ac(pt_matrix, M_PI / 4);
 	rot_ax_ac(pt_matrix, 0.615472907);
+	update_px_coords(pt_matrix);
 }
