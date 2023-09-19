@@ -19,7 +19,8 @@ SRC_FILES = main.c \
 			00_parsemap_utils.c \
 			01_load_points.c \
 			01_load_points_utils.c \
-			02_projection.c
+			02_projection.c \
+			graphic_cleanup_utils.c
 
 BRES_FILES = bres_test.c \
 			 init.c \
