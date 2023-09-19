@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/19 15:29:04 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:36:52 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ int				handle_keypress(int keysym, t_meta *meta);
 int				free_matrix_data(t_meta *meta);
 int				free_map_data(t_meta *meta);
 int				cleanup_graph_resources(t_meta *meta);
+int				on_close(t_meta *meta);
 
 
 /* general utils */

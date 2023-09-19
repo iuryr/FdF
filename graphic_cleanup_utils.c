@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:15:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/19 15:30:58 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:03:16 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ int	cleanup_graph_resources(t_meta *meta)
 	free(meta->img);
 	free(meta->mlx_ptr);
 	return (0);
+}
+
+int	on_close(t_meta *meta)
+{
+	free_matrix_data(meta);
+	free_map_data(meta);
+	cleanup_graph_resources(meta);
+	return(0);
 }
