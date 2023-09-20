@@ -131,6 +131,7 @@ void			alloc_map_data(t_map *map);
 void			get_map_data(t_map *map, char *filename);
 void			get_map_cols(t_map *map, int fd);
 void			get_map_rows(t_map *map, int fd);
+char			*gnl_wo_nl(int fd);
 
 /* Loading points coordinates function */
 void			load_pt_matrix(t_meta *meta);

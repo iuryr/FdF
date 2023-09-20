@@ -58,7 +58,7 @@ void	get_map_data(t_map *map, char *filename)
 	line = 0;
 	while (line < map->rows)
 	{
-		line_content = get_next_line(fd);
+		line_content = gnl_wo_nl(fd);
 		split_line = ft_split(line_content, ' ');
 		col = 0;
 		while (col < map->cols)
