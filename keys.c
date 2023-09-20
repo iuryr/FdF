@@ -14,9 +14,6 @@
 
 int	handle_keypress(int keysym, t_meta *meta)
 {
-	unsigned int	i;
-
-	i = 0;
 	if (keysym == XK_Escape)
 	{
 		on_close(meta);

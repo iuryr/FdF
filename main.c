@@ -31,4 +31,8 @@ int	main(int argc, char *argv[])
 	mlx_hook(meta.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &meta);
 	mlx_hook(meta.win_ptr, DestroyNotify, NoEventMask, &on_close, &meta);
 	mlx_loop(meta.mlx_ptr);
+	free_matrix_data(&meta);
+	free_map_data(&meta);
+	cleanup_graph_resources(&meta);
+	return (0);
 }

@@ -52,8 +52,6 @@ int	cleanup_graph_resources(t_meta *meta)
 
 int	on_close(t_meta *meta)
 {
-	free_matrix_data(meta);
-	free_map_data(meta);
-	cleanup_graph_resources(meta);
-	return(0);
+	mlx_loop_end(meta->mlx_ptr);
+	return (0);
 }
