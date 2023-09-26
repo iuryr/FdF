@@ -70,6 +70,7 @@ typedef struct s_point
 	float	xf;
 	float	yf;
 	float	zf;
+	int	color;
 }	t_point;
 
 typedef struct s_ptmatrix
