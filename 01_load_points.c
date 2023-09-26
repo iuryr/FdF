@@ -51,7 +51,9 @@ void	load_points(t_meta *meta)
 		{
 			meta->pt_matrix.data[i][j].x = j;
 			meta->pt_matrix.data[i][j].y = i;
-			meta->pt_matrix.data[i][j].z = meta->map.data[i][j];
+			meta->pt_matrix.data[i][j].z = ft_atoi(meta->map.data[i][j]);
+			meta->pt_matrix.data[i][j].color =
+				get_color(meta->map.data[i][j]);
 			j++;
 		}
 		i++;

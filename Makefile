@@ -19,6 +19,7 @@ SRC_FILES = main.c \
 			00_parsemap_utils.c \
 			01_load_points.c \
 			01_load_points_utils.c \
+			01_load_points_utils_2.c \
 			02_projection.c \
 			graphic_cleanup_utils.c
 
@@ -57,7 +58,7 @@ compile_gdb:
 	$(CC) $(FLAGS) $(SRC_FILES) libft/*.c -gdwarf-4 -o test.out $(OTHER_LIBS) -Llibft -l:libft.a
 
 test: compile_gdb
-	gdb --args test.out maps/test_maps/42.fdf
+	gdb --args test.out maps/test_maps/elem-col.fdf
 
 leak: compile_gdb
 	valgrind --leak-check=full --show-leak-kinds=all ./test.out maps/test_maps/42.fdf

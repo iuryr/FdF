@@ -33,6 +33,7 @@
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 800
 
+# define DEFAULT_COLOR 0xFFFFFF
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0x00FF00
 # define WHITE_PIXEL 0xFFFFFF
@@ -59,7 +60,7 @@ typedef struct s_map
 	unsigned int	rows;
 	unsigned int	cols;
 	unsigned int	points_count;
-	int				**data;
+	char				***data;
 }	t_map;
 
 typedef struct s_point
@@ -144,6 +145,8 @@ void			update_center(t_ptmatrix *points);
 void			set_float_coords(t_ptmatrix *points);
 void			update_int_coords(t_ptmatrix *points);
 void			load_points(t_meta *meta);
+void			get_color(t_meta *meta, unsigned int line, unsigned int col);
+void			set_default_color(t_meta *meta, unsigned int line, unsigned int col);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);

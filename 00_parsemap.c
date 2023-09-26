@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft/libft.h"
 
 void	load_map(t_meta *meta, char *filename)
 {
@@ -37,11 +36,11 @@ void	alloc_map_data(t_map *map)
 {
 	unsigned int	i;
 
-	map->data = (int **) malloc(map->rows * sizeof(int *));
+	map->data = (char ***) malloc(map->rows * sizeof(char ***));
 	i = 0;
 	while (i < map->rows)
 	{
-		map->data[i] = malloc(map->cols * sizeof(int));
+		map->data[i] = malloc(map->cols * sizeof(char **));
 		i++;
 	}
 }
@@ -63,7 +62,7 @@ void	get_map_data(t_map *map, char *filename)
 		col = 0;
 		while (col < map->cols)
 		{
-			map->data[line][col] = ft_atoi(split_line[col]);
+			map->data[line][col] = ft_strdup(split_line[col]);
 			free(split_line[col]);
 			col++;
 		}
