@@ -1,8 +1,8 @@
 NAME = fdf
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -c
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -c -O3
+FLAGS = -Wall -Wextra -Werror -O3
 
 LIBFT_DIR = ./libft
 OTHER_LIBS = -lX11 -lXext -lmlx -lm
