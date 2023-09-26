@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:15:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/19 18:03:16 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:20:58 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,17 @@ int	free_matrix_data(t_meta *meta)
 int	free_map_data(t_meta *meta)
 {
 	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
 	while (i < meta->map.rows)
 	{
+		j = 0;
+		while (j < meta->map.cols)
+		{
+			free(meta->map.data[i][j]);
+			j++;
+		}
 		free(meta->map.data[i]);
 		i++;
 	}

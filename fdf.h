@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/19 17:36:52 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:05:15 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void			update_int_coords(t_ptmatrix *points);
 void			load_points(t_meta *meta);
 void			get_color(t_meta *meta, unsigned int line, unsigned int col);
 void			set_default_color(t_meta *meta, unsigned int line, unsigned int col);
+int	fdf_atox(const char *s);
 
 /* Geometry functions*/
 void			alloc_ptmatrix_data(t_ptmatrix *pt_matrix);
@@ -162,7 +163,7 @@ void			to_iso(t_ptmatrix *pt_matrix);
 
 /* Drawing functions */
 void			img_pix_put(t_img *img, int x, int y, int color);
-void			draw_line(t_point start, t_point end, int color, t_img *img);
+void			draw_line(t_point start, t_point end, t_img *img);
 void			draw_bres_low(t_point start, t_point end,
 					int color, t_img *img);
 void			draw_samplex(t_draw_info info, t_img *img);
@@ -179,7 +180,7 @@ void			to_render_input(t_ptmatrix pt_matrix, t_ptmatrix *to_render);
 int				render(t_meta *meta);
 void			render_bg(t_img *img, int color);
 void			render_points(t_ptmatrix pt_matrix, int color, t_img *img); //candidata a ser limada
-void			render_lines(t_ptmatrix points, int color, t_img *img);
+void	render_lines(t_ptmatrix points, t_img *img);
 void			update_px_coords(t_ptmatrix *points);
 void			determine_range(t_ptmatrix *points);
 void			prepare_render(t_ptmatrix *points);

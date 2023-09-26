@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 15:48:38 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 14:11:56 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:21:01 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void	load_points(t_meta *meta)
 			meta->pt_matrix.data[i][j].x = j;
 			meta->pt_matrix.data[i][j].y = i;
 			meta->pt_matrix.data[i][j].z = ft_atoi(meta->map.data[i][j]);
-			meta->pt_matrix.data[i][j].color =
-				get_color(meta->map.data[i][j]);
+			get_color(meta, i, j);
 			j++;
 		}
 		i++;

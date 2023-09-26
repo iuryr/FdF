@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:46:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/18 18:29:20 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:03:16 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	render_points(t_ptmatrix pt_matrix, int color, t_img *img)
 	}
 }
 
-void	render_lines(t_ptmatrix points, int color, t_img *img)
+void	render_lines(t_ptmatrix points, t_img *img)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -57,17 +57,17 @@ void	render_lines(t_ptmatrix points, int color, t_img *img)
 		j = 0;
 		while (j < points.cols - 1)
 		{
-			draw_line(points.data[i][j], points.data[i + 1][j], color, img);
-			draw_line(points.data[i][j], points.data[i][j + 1], color, img);
+			draw_line(points.data[i][j], points.data[i + 1][j], img);
+			draw_line(points.data[i][j], points.data[i][j + 1], img);
 			j++;
 		}
-		draw_line(points.data[i][j], points.data[i + 1][j], color, img);
+		draw_line(points.data[i][j], points.data[i + 1][j], img);
 		i++;
 	}
 	j = 0;
 	while (j < points.cols - 1)
-	{
-		draw_line(points.data[i][j], points.data[i][j + 1], color, img);
+	{	
+		draw_line(points.data[i][j], points.data[i][j + 1], img);
 		j++;
 	}
 }
@@ -91,7 +91,7 @@ void update_img(t_meta *meta)
 	to_iso(&to_render);
 	scale(&to_render);
 	center_to_wm(&to_render);
-	render_lines(to_render, WHITE_PIXEL, meta->img);
+	render_lines(to_render, meta->img);
 }
 
 int	render(t_meta *meta)

@@ -6,18 +6,18 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:44:52 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 13:33:47 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:04:14 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line(t_point start, t_point end, int color, t_img *img)
+void	draw_line(t_point start, t_point end, t_img *img)
 {
 	if (ft_abs(end.x - start.x) >= ft_abs(end.y - start.y))
-		draw_bres_low(start, end, color, img);
+		draw_bres_low(start, end, start.color, img);
 	else
-		draw_bres_high(start, end, color, img);
+		draw_bres_high(start, end, start.color, img);
 }
 
 //sample X
