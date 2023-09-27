@@ -5,8 +5,10 @@ CFLAGS = -Wall -Wextra -Werror -c -O3
 FLAGS = -Wall -Wextra -Werror -O3
 
 LIBFT_DIR = ./libft
-LIBFT = libft.a
-OTHER_LIBS = -lX11 -lXext -lmlx -lm
+LIBFT = ./libft/libft.a
+
+
+LIBS = -lX11 -lXext -lmlx -lm -L./libft -l:libft.a
 
 SRC_FILES = main.c \
 			00_parsemap_1.c \
@@ -40,17 +42,22 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES)
-	$(CC) $(FLAGS) $(OBJ_FILES) -o $(NAME) $(OTHER_LIBS) -L$(LIBFTDIR) -l:$(LIBFT)
+$(NAME): $(LIBFT) $(OBJ_FILES)  
+	$(CC) $(FLAGS) $(OBJ_FILES) -o $(NAME) $(LIBS) 
 
 %.o : %.c
 	$(CC) $(CFLAGS) $< -o $@
 
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
 clean:
 	rm -f *.o
+	$(MAKE) -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C libft fclean
 
 re: fclean $(NAME)
 
@@ -70,3 +77,5 @@ compile_bres:
 
 bresenham: compile_bres
 	./test.out
+
+.PHONY: clean libft
