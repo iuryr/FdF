@@ -1,8 +1,8 @@
 NAME = fdf
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -c -O3
-FLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -c
+FLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = ./libft
 LIBFT = ./libft/libft.a
@@ -61,6 +61,8 @@ fclean: clean
 
 re: fclean $(NAME)
 
+.PHONY: fclean clean all re
+
 #########Regras de teste
 compile_gdb:
 	$(CC) $(FLAGS) $(SRC_FILES) libft/*.c -gdwarf-4 -o test.out $(OTHER_LIBS) -Llibft -l:libft.a
@@ -78,4 +80,3 @@ compile_bres:
 bresenham: compile_bres
 	./test.out
 
-.PHONY: clean libft
