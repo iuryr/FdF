@@ -5,23 +5,24 @@ CFLAGS = -Wall -Wextra -Werror -c -O3
 FLAGS = -Wall -Wextra -Werror -O3
 
 LIBFT_DIR = ./libft
+LIBFT = libft.a
 OTHER_LIBS = -lX11 -lXext -lmlx -lm
 
 SRC_FILES = main.c \
-			init.c \
-			draw.c \
-			draw_utils.c \
-			render.c \
-			keys.c \
-			geometry.c \
-			geometry_utils.c \
-			00_parsemap.c \
-			00_parsemap_utils.c \
-			01_load_points.c \
-			01_load_points_utils.c \
-			01_load_points_utils_2.c \
-			02_projection.c \
-			graphic_cleanup_utils.c
+			00_parsemap_1.c \
+			00_parsemap_2.c \
+			01_load_points_1.c \
+			01_load_points_2.c \
+			01_load_points_3.c \
+			02_init_1.c \
+			03_render_1.c \
+			04_geometry_1.c \
+			04_geometry_2.c \
+			05_projection_1.c \
+			06_draw_1.c \
+			06_draw_2.c \
+			07_keys_1.c \
+			08_graphic_cleanup_1.c
 
 BRES_FILES = bres_test.c \
 			 init.c \
@@ -40,7 +41,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	$(CC) $(FLAGS) $(OBJ_FILES) -o $(NAME) $(OTHER_LIBS) -Llibft -l:libft.a
+	$(CC) $(FLAGS) $(OBJ_FILES) -o $(NAME) $(OTHER_LIBS) -L$(LIBFTDIR) -l:$(LIBFT)
 
 %.o : %.c
 	$(CC) $(CFLAGS) $< -o $@
@@ -61,7 +62,7 @@ test: compile_gdb
 	gdb --args test.out maps/test_maps/elem-col.fdf
 
 leak: compile_gdb
-	valgrind --leak-check=full --show-leak-kinds=all ./test.out maps/test_maps/42.fdf
+	valgrind --leak-check=full --show-leak-kinds=all -s ./test.out maps/test_maps/julia.fdf
 
 ######### Testando algoritmo de bresenham
 compile_bres:

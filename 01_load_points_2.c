@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01_load_points_utils.c                             :+:      :+:    :+:   */
+/*   01_load_points_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:18:14 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 14:31:04 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:39:34 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,26 @@ void	set_minmax(t_ptmatrix *points)
 	points->x_min = 0;
 	points->y_max = 0;
 	points->y_min = 0;
+}
+
+void	set_float_coords(t_ptmatrix *points)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	while (i < points->rows)
+	{
+		j = 0;
+		while (j < points->cols)
+		{
+			points->data[i][j].xf = floor(points->data[i][j].x);
+			points->data[i][j].yf = floor(points->data[i][j].y);
+			points->data[i][j].zf = floor(points->data[i][j].z);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	update_minmax(t_ptmatrix *points)
@@ -51,30 +71,10 @@ void	update_center(t_ptmatrix *points)
 	points->y_c = (points->y_max - points->y_min) / 2;
 }
 
-void	set_float_coords(t_ptmatrix *points)
+void	update_int_coords(t_ptmatrix *points)
 {
 	unsigned int	i;
 	unsigned int	j;
-
-	i = 0;
-	while (i < points->rows)
-	{
-		j = 0;
-		while (j < points->cols)
-		{
-			points->data[i][j].xf = floor(points->data[i][j].x);
-			points->data[i][j].yf = floor(points->data[i][j].y);
-			points->data[i][j].zf = floor(points->data[i][j].z);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	update_int_coords(t_ptmatrix *points)
-{
-	unsigned int i;
-	unsigned int j;
 
 	i = 0;
 	while (i < points->rows)

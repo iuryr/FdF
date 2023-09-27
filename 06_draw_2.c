@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*   06_draw_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:13:25 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/15 14:46:23 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:11:42 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,4 @@ void	init_draw_info(t_draw_info *info, t_point start, t_point end, int color)
 	info->dy = end.y - start.y;
 	info->slope = (float) info->dy / (float) info->dx;
 	info->color = color;
-}
-
-void	to_render_input(t_ptmatrix pt_matrix, t_ptmatrix *to_render)
-{
-	to_render->rows = pt_matrix.rows;
-
 }

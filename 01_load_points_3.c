@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01_load_points_utils_2.c                           :+:      :+:    :+:   */
+/*   01_load_points_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:43:20 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/26 18:12:56 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:46:30 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	update_px_coords(t_ptmatrix *points)
+{
+	update_int_coords(points);
+	update_minmax(points);
+	update_center(points);
+}
+
+void	determine_range(t_ptmatrix *points)
+{
+	points->x_range = points->x_max - points->x_min;
+	points->y_range = points->y_max - points->y_min;
+}
+
 void	get_color(t_meta *meta, unsigned int line, unsigned int col)
 {
-	char *substr;
+	char	*substr;
 
 	if (ft_strchr(meta->map.data[line][col], ',') == NULL)
 		set_default_color(meta, line, col);
 	else
 	{
 		substr = ft_substr(
-			ft_strchr(meta->map.data[line][col], ','), 1, 8);
+				ft_strchr(meta->map.data[line][col], ','), 1, 8);
 		meta->pt_matrix.data[line][col].color = fdf_atox(substr);
 		free(substr);
 	}
