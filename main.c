@@ -17,7 +17,10 @@ int	main(int argc, char *argv[])
 	t_meta	meta;
 
 	if (argc != 2)
+	{
+		ft_printf("Usage: ./fdf map_file_name\n");
 		exit(ARGC_ERROR);
+	}
 	load_map(&meta, argv[1]);
 	load_pt_matrix(&meta);
 	system_init(&meta);
