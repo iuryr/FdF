@@ -127,10 +127,10 @@ void			img_init(t_meta *meta);
 void			update_img(t_meta *meta);
 
 /* Map parsing functions */
-void			load_map(t_meta *meta, char *filename);
-void			get_map_dimensions(t_map *map, char *filename);
+int			load_map(t_meta *meta, char *filename);
+int			get_map_dimensions(t_map *map, char *filename);
 void			alloc_map_data(t_map *map);
-void			get_map_data(t_map *map, char *filename);
+int			get_map_data(t_map *map, char *filename);
 void			get_map_cols(t_map *map, int fd);
 void			get_map_rows(t_map *map, int fd);
 char			*gnl_wo_nl(int fd);

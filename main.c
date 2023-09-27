@@ -21,7 +21,11 @@ int	main(int argc, char *argv[])
 		ft_printf("Usage: ./fdf map_file_name\n");
 		exit(ARGC_ERROR);
 	}
-	load_map(&meta, argv[1]);
+	if (load_map(&meta, argv[1]) != 0)
+	{
+		ft_printf("Problem opening map file. Exiting.\n");
+		exit(FILDE_ERROR);
+	}
 	load_pt_matrix(&meta);
 	system_init(&meta);
 	img_init(&meta);
