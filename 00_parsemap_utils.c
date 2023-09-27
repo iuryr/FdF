@@ -62,6 +62,7 @@ void	get_map_rows(t_map *map, int fd)
 				free(row);
 				row = gnl_wo_nl(fd);
 			}
+			ft_printf("Map file dimensions are not proper. Exiting.\n");
 			exit(MAP_DIM_ERROR);
 		}
 		nrows++;
