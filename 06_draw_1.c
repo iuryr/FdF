@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:44:52 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/27 16:10:01 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:53:33 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	draw_line(t_point start, t_point end, t_img *img)
 {
 	if (ft_abs(end.x - start.x) >= ft_abs(end.y - start.y))
-		draw_bres_low(start, end, start.color, img);
+		draw_bres_low(start, end, end.color, img);
 	else
-		draw_bres_high(start, end, start.color, img);
+		draw_bres_high(start, end, end.color, img);
 }
 
 //sample X
