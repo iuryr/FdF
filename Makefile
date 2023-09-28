@@ -1,4 +1,5 @@
 NAME = fdf
+BONUS = fdf_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -c
@@ -26,6 +27,22 @@ SRC_FILES = main.c \
 			07_keys_1.c \
 			08_graphic_cleanup_1.c
 
+BONUS_SRC_FILES = main_bonus.c \
+			00_parsemap_1_bonus.c \
+			00_parsemap_2_bonus.c \
+			01_load_points_1_bonus.c \
+			01_load_points_2_bonus.c \
+			01_load_points_3_bonus.c \
+			02_init_1_bonus.c \
+			03_render_1_bonus.c \
+			04_geometry_1_bonus.c \
+			04_geometry_2_bonus.c \
+			05_projection_1_bonus.c \
+			06_draw_1_bonus.c \
+			06_draw_2_bonus.c \
+			07_keys_1_bonus.c \
+			08_graphic_cleanup_1_bonus.c
+
 BRES_FILES = bres_test.c \
 			 init.c \
 			 draw.c \
@@ -39,6 +56,8 @@ BRES_FILES = bres_test.c \
 			 02_projection.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
+
+BONUS_OBJ_FILES = $(BONUS_SRC_FILES:.c=.o)
 
 all: $(NAME)
 
@@ -57,9 +76,16 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f fdf_bonus
 	$(MAKE) -C libft fclean
 
 re: fclean $(NAME)
+
+$(BONUS): $(LIBFT) $(BONUS_OBJ_FILES)
+	$(CC) $(FLAGS) $(BONUS_OBJ_FILES) $(LIBS) -o $(BONUS) 
+
+bonus: $(BONUS)
+
 
 .PHONY: fclean clean all re
 

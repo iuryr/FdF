@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:22:08 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/28 10:59:14 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:51:15 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	to_iso(t_ptmatrix *pt_matrix)
 {
-	rot_az_ac(pt_matrix, M_PI / 4);
+	rot_az_ac(pt_matrix, -M_PI / 4);
 	rot_ax_ac(pt_matrix, atan(1 / sqrt(2)));
 	update_px_coords(pt_matrix);
 }
