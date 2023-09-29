@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 //init xserver connection & creates window & img, dealing with possible failures
 int	system_init(t_meta *meta)
