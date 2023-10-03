@@ -12,16 +12,31 @@
 
 #include "fdf_bonus.h"
 
-void	render_bg(t_img *img, int color)
+void	render_img_bg(t_img *img, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < WINDOW_HEIGHT)
+	while (i < IMG_HEIGHT)
 	{
 		j = 0;
-		while (j < WINDOW_WIDTH)
+		while (j < IMG_WIDTH)
+			img_pix_put(img, j++, i, color);
+		i++;
+	}
+}
+
+void	render_menu_bg(t_img *img, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < MENU_HEIGHT)
+	{
+		j = 0;
+		while (j < MENU_WIDTH)
 			img_pix_put(img, j++, i, color);
 		i++;
 	}
@@ -58,19 +73,32 @@ void	prepare_first_render(t_meta *meta)
 	t_ptmatrix	to_render;
 
 	to_render = meta->pt_matrix;
-	render_bg(meta->img, BLACK_PIXEL);
+	render_img_bg(meta->img, BLUE_PIXEL);
+	render_menu_bg(meta->menu_img, RED_PIXEL);
 	center_to_og(&to_render);
 	to_iso(&to_render);
 	scale(&to_render);
-	center_to_wm(&to_render);
+	center_to_im(&to_render);
 	render_lines(to_render, meta->img);
+}
+
+void	render_menu(t_meta *meta)
+{
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 10, WHITE_PIXEL, "FDF - iusantos");
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 30, WHITE_PIXEL, "ARROWS: TRANSLATION");
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 50, WHITE_PIXEL, "Q/E : Rotation X");
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 70, WHITE_PIXEL, "A/D : Rotation Y");
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 90, WHITE_PIXEL, "Z/C : Rotation Z");
 }
 
 int	render(t_meta *meta)
 {
 	if (meta->win_ptr == NULL)
 		return (-1);
-	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->img->mlx_img,
+	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->menu_img->mlx_img,
 		0, 0);
+	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->img->mlx_img,
+		MENU_WIDTH, 0);
+	render_menu(meta);
 	return (0);
 }

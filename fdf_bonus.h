@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -32,6 +32,10 @@
 
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 800
+# define IMG_WIDTH 1000
+# define IMG_HEIGHT 800
+# define MENU_WIDTH 200
+# define MENU_HEIGHT 800
 
 # define DEFAULT_COLOR 0xFFFFFF
 # define RED_PIXEL 0xFF0000
@@ -107,6 +111,7 @@ typedef struct s_meta
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		*img;
+	t_img		*menu_img;
 	t_map		map;
 	t_ptmatrix	pt_matrix;
 }	t_meta;
@@ -125,6 +130,7 @@ int				system_init(t_meta *meta);
 int				graph_facilities_init(t_meta *meta);
 int				win_init(t_meta *meta);
 int				img_init(t_meta *meta);
+int				menu_img_init(t_meta *meta);
 
 /* Map parsing functions */
 int				load_map(t_meta *meta, char *filename);
@@ -155,7 +161,7 @@ int				fdf_atox(const char *s);
 
 /* Geometry functions*/
 void			scale(t_ptmatrix *pt_matrix);
-void			center_to_wm(t_ptmatrix *pt_matrix);
+void			center_to_im(t_ptmatrix *pt_matrix);
 void			center_to_og(t_ptmatrix *points);
 void			og_to_center(t_ptmatrix *points);
 void			init_trig(t_trig *angle, float theta);
@@ -181,7 +187,8 @@ unsigned int	ft_abs(int number);
 /* Rendering Functions */
 void			prepare_first_render(t_meta *meta);
 int				render(t_meta *meta);
-void			render_bg(t_img *img, int color);
+void	render_img_bg(t_img *img, int color);
+void	render_menu_bg(t_img *img, int color);
 void			render_lines(t_ptmatrix points, t_img *img);
 
 /* Key pressing & releasing*/
@@ -193,4 +200,4 @@ int				free_map_data(t_meta *meta);
 int				cleanup_graph_resources(t_meta *meta);
 int				on_close(t_meta *meta);
 
-#endif //_FDF_H_
+#endif //_FDF_BONUS_H_

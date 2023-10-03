@@ -18,6 +18,7 @@ int	system_init(t_meta *meta)
 	graph_facilities_init(meta);
 	win_init(meta);
 	img_init(meta);
+	menu_img_init(meta);
 	return (0);
 }
 
@@ -51,9 +52,26 @@ int	img_init(t_meta *meta)
 		free(meta->mlx_ptr);
 		exit(IMG_INIT_ERROR);
 	}
-	meta->img->mlx_img = mlx_new_image(meta->mlx_ptr, WINDOW_WIDTH,
-			WINDOW_HEIGHT);
+	meta->img->mlx_img = mlx_new_image(meta->mlx_ptr,IMG_WIDTH , IMG_HEIGHT);
 	meta->img->addr = mlx_get_data_addr(meta->img->mlx_img, &meta->img->bpp,
 			&meta->img->line_len, &meta->img->endian);
+	return (0);
+}
+
+int	menu_img_init(t_meta *meta)
+{
+	meta->menu_img = malloc(sizeof(t_img));
+	if (meta->menu_img == NULL)
+	{
+		free(meta->img);
+		free(meta->win_ptr);
+		free(meta->mlx_ptr);
+		exit(IMG_INIT_ERROR);
+	}
+	meta->menu_img->mlx_img = mlx_new_image(meta->mlx_ptr, MENU_WIDTH,
+			MENU_HEIGHT);
+	meta->menu_img->addr = mlx_get_data_addr(
+		meta->menu_img->mlx_img, &meta->menu_img->bpp,
+		&meta->menu_img->line_len, &meta->menu_img->endian);
 	return (0);
 }

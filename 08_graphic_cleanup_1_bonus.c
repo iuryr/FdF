@@ -50,8 +50,10 @@ int	free_map_data(t_meta *meta)
 int	cleanup_graph_resources(t_meta *meta)
 {
 	mlx_destroy_image(meta->mlx_ptr, meta->img->mlx_img);
+	mlx_destroy_image(meta->mlx_ptr, meta->menu_img->mlx_img);
 	mlx_destroy_window(meta->mlx_ptr, meta->win_ptr);
 	mlx_destroy_display(meta->mlx_ptr);
+	free(meta->menu_img);
 	free(meta->img);
 	free(meta->mlx_ptr);
 	return (0);

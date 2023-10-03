@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		ft_printf("Usage: ./fdf map_file_name\n");
+		ft_printf("Usage: ./fdf_bonus map_file_name\n");
 		exit(ARGC_ERROR);
 	}
 	if (load_map(&meta, argv[1]) != 0)

@@ -37,7 +37,7 @@ void	scale(t_ptmatrix *pt_matrix)
 	update_px_coords(pt_matrix);
 }
 
-void	center_to_wm(t_ptmatrix *pt_matrix)
+void	center_to_im(t_ptmatrix *pt_matrix)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -49,9 +49,9 @@ void	center_to_wm(t_ptmatrix *pt_matrix)
 		while (j < pt_matrix->cols)
 		{
 			pt_matrix->data[i][j].x = pt_matrix->data[i][j].x
-				+ WINDOW_WIDTH / 2;
+				+ IMG_WIDTH / 2;
 			pt_matrix->data[i][j].y = pt_matrix->data[i][j].y
-				+ WINDOW_HEIGHT / 2;
+				+ IMG_HEIGHT / 2;
 			j++;
 		}
 		i++;

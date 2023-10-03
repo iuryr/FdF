@@ -18,8 +18,8 @@ void	determine_scale(t_ptmatrix *points)
 	float	scale_y;
 
 	determine_range(points);
-	scale_x = WINDOW_WIDTH / (float) points->x_range;
-	scale_y = WINDOW_HEIGHT / (float) points->y_range;
+	scale_x = IMG_WIDTH / (float) points->x_range;
+	scale_y = IMG_HEIGHT / (float) points->y_range;
 	if (scale_x <= scale_y)
 		points->scale = scale_x * 0.9;
 	else
