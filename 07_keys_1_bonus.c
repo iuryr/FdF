@@ -15,8 +15,14 @@
 int	handle_keypress(int keysym, t_meta *meta)
 {
 	if (keysym == XK_Escape)
-	{
 		on_close(meta);
-	}
+	else if (keysym == XK_Up)
+		apply_neg_offset_y(meta);
+	else if (keysym == XK_Down)
+		apply_pos_offset_y(meta);
+	else if (keysym == XK_Right)
+		apply_pos_offset_x(meta);
+	else if (keysym == XK_Left)
+		apply_neg_offset_x(meta);
 	return (0);
 }

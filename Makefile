@@ -41,7 +41,8 @@ BONUS_SRC_FILES = main_bonus.c \
 			06_draw_1_bonus.c \
 			06_draw_2_bonus.c \
 			07_keys_1_bonus.c \
-			08_graphic_cleanup_1_bonus.c
+			08_graphic_cleanup_1_bonus.c \
+			09_hooks_1.c
 
 BRES_FILES = bres_test.c \
 			 init.c \
@@ -91,7 +92,7 @@ bonus: $(BONUS)
 
 #########Regras de teste
 compile_gdb:
-	$(CC) $(FLAGS) $(SRC_FILES) libft/*.c -gdwarf-4 -o test.out $(OTHER_LIBS) -Llibft -l:libft.a
+	$(CC) $(FLAGS) $(BONUS_SRC_FILES) libft/*.c -gdwarf-4 -o test.out $(LIBS)
 
 test: compile_gdb
 	gdb --args test.out maps/test_maps/elem-col.fdf

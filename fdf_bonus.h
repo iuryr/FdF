@@ -114,6 +114,7 @@ typedef struct s_meta
 	t_img		*menu_img;
 	t_map		map;
 	t_ptmatrix	pt_matrix;
+	int		re_render;
 }	t_meta;
 
 typedef struct s_line
@@ -168,7 +169,6 @@ void			init_trig(t_trig *angle, float theta);
 void			rot_az_ac(t_ptmatrix *points, float theta);
 void			rot_ay_ac(t_ptmatrix *points, float theta);
 void			rot_ax_ac(t_ptmatrix *points, float theta);
-void			rotation_45dl(t_ptmatrix *pt_matrix); //candidata a ser limada
 void			to_iso(t_ptmatrix *pt_matrix);
 
 /* Drawing functions */
@@ -200,4 +200,9 @@ int				free_map_data(t_meta *meta);
 int				cleanup_graph_resources(t_meta *meta);
 int				on_close(t_meta *meta);
 
+int	init_hooks(t_meta *meta);
+void	apply_neg_offset_y(t_meta *meta);
+void	apply_pos_offset_y(t_meta *meta);
+void	apply_pos_offset_x(t_meta *meta);
+void	apply_neg_offset_x(t_meta *meta);
 #endif //_FDF_BONUS_H_

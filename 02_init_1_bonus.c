@@ -25,6 +25,7 @@ int	system_init(t_meta *meta)
 int	graph_facilities_init(t_meta *meta)
 {
 	meta->mlx_ptr = mlx_init();
+	meta->re_render = 0;
 	if (meta->mlx_ptr == NULL)
 		exit(MLX_INIT_ERROR);
 	return (0);

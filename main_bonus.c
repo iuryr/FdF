@@ -29,9 +29,7 @@ int	main(int argc, char *argv[])
 	load_pt_matrix(&meta);
 	system_init(&meta);
 	prepare_first_render(&meta);
-	mlx_loop_hook(meta.mlx_ptr, &render, &meta);
-	mlx_hook(meta.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &meta);
-	mlx_hook(meta.win_ptr, DestroyNotify, NoEventMask, &on_close, &meta);
+	init_hooks(&meta);
 	mlx_loop(meta.mlx_ptr);
 	free_matrix_data(&meta);
 	free_map_data(&meta);

@@ -70,17 +70,23 @@ void	render_lines(t_ptmatrix points, t_img *img)
 
 void	prepare_first_render(t_meta *meta)
 {
-	t_ptmatrix	to_render;
-
-	to_render = meta->pt_matrix;
 	render_img_bg(meta->img, BLUE_PIXEL);
 	render_menu_bg(meta->menu_img, RED_PIXEL);
-	center_to_og(&to_render);
-	to_iso(&to_render);
-	scale(&to_render);
-	center_to_im(&to_render);
-	render_lines(to_render, meta->img);
+	center_to_og(&meta->pt_matrix);
+	to_iso(&meta->pt_matrix);
+	scale(&meta->pt_matrix);
+	center_to_im(&meta->pt_matrix);
+	render_lines(meta->pt_matrix, meta->img);
 }
+
+void	update_render(t_meta *meta)
+{
+	mlx_clear_window(meta->mlx_ptr, meta->win_ptr);
+	render_img_bg(meta->img, BLUE_PIXEL);
+	render_menu_bg(meta->menu_img, RED_PIXEL);
+	render_lines(meta->pt_matrix, meta->img);
+}
+
 
 void	render_menu(t_meta *meta)
 {
@@ -95,10 +101,13 @@ int	render(t_meta *meta)
 {
 	if (meta->win_ptr == NULL)
 		return (-1);
+	if (meta->re_render == 1)
+		update_render(meta);
 	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->menu_img->mlx_img,
 		0, 0);
 	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->img->mlx_img,
 		MENU_WIDTH, 0);
 	render_menu(meta);
+	meta->re_render = 0;
 	return (0);
 }
