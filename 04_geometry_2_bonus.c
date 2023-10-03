@@ -55,6 +55,15 @@ void	rot_az_ac(t_ptmatrix *points, float theta)
 	update_int_coords(points);
 }
 
+void	rot_az(t_meta *meta, float theta)
+{
+	center_to_og(&meta->pt_matrix);
+	rot_az_ac(&meta->pt_matrix, theta);
+	update_int_coords(&meta->pt_matrix);
+	og_to_center(&meta->pt_matrix);
+	meta->re_render = 1;
+}
+
 //rotate figure through xz theta radians clockwise around its own center
 void	rot_ay_ac(t_ptmatrix *points, float theta)
 {
@@ -82,6 +91,15 @@ void	rot_ay_ac(t_ptmatrix *points, float theta)
 		i++;
 	}
 	update_int_coords(points);
+}
+
+void	rot_ay(t_meta *meta, float theta)
+{
+	center_to_og(&meta->pt_matrix);
+	rot_ay_ac(&meta->pt_matrix, theta);
+	update_int_coords(&meta->pt_matrix);
+	og_to_center(&meta->pt_matrix);
+	meta->re_render = 1;
 }
 
 //rotate figure through yz theta radians clockwise around its own center
