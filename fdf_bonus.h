@@ -88,8 +88,12 @@ typedef struct s_ptmatrix
 	int				y_min;
 	int				y_max;
 	int				y_range;
+	int				z_min;
+	int				z_max;
+	int				z_range;
 	int				x_c;
 	int				y_c;
+	int				z_c;
 	int				x_offset;
 	int				y_offset;
 	float			scale;
@@ -205,4 +209,6 @@ void	apply_neg_offset_y(t_meta *meta);
 void	apply_pos_offset_y(t_meta *meta);
 void	apply_pos_offset_x(t_meta *meta);
 void	apply_neg_offset_x(t_meta *meta);
+
+void	rot_ax(t_meta *meta, float theta);
 #endif //_FDF_BONUS_H_

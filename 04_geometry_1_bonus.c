@@ -48,14 +48,15 @@ void	center_to_im(t_ptmatrix *pt_matrix)
 		j = 0;
 		while (j < pt_matrix->cols)
 		{
-			pt_matrix->data[i][j].x = pt_matrix->data[i][j].x
-				+ IMG_WIDTH / 2;
-			pt_matrix->data[i][j].y = pt_matrix->data[i][j].y
-				+ IMG_HEIGHT / 2;
+			pt_matrix->data[i][j].xf = pt_matrix->data[i][j].x
+				+ IMG_WIDTH / 2.0;
+			pt_matrix->data[i][j].yf = pt_matrix->data[i][j].y
+				+ IMG_HEIGHT / 2.0;
 			j++;
 		}
 		i++;
 	}
+	update_px_coords(pt_matrix);
 }
 
 void	center_to_og(t_ptmatrix *points)
@@ -73,6 +74,8 @@ void	center_to_og(t_ptmatrix *points)
 			points->data[i][j].xf = points->data[i][j].xf - points->x_c;
 			points->data[i][j].y = points->data[i][j].y - points->y_c;
 			points->data[i][j].yf = points->data[i][j].yf - points->y_c;
+			points->data[i][j].z = points->data[i][j].z - points->z_c;
+			points->data[i][j].zf = points->data[i][j].zf - points->z_c;
 			j++;
 		}
 		i++;
@@ -94,6 +97,8 @@ void	og_to_center(t_ptmatrix *points)
 			points->data[i][j].xf = points->data[i][j].xf + points->x_c;
 			points->data[i][j].y = points->data[i][j].y + points->y_c;
 			points->data[i][j].yf = points->data[i][j].yf + points->y_c;
+			points->data[i][j].z = points->data[i][j].z + points->z_c;
+			points->data[i][j].zf = points->data[i][j].zf + points->z_c;
 			j++;
 		}
 		i++;

@@ -18,6 +18,8 @@ void	set_minmax(t_ptmatrix *points)
 	points->x_min = 0;
 	points->y_max = 0;
 	points->y_min = 0;
+	points->z_min = 0;
+	points->z_max = 0;
 }
 
 void	set_float_coords(t_ptmatrix *points)
@@ -59,6 +61,10 @@ void	update_minmax(t_ptmatrix *points)
 				points->y_min = points->data[i][j].y;
 			if (points->data[i][j].y > points->y_max)
 				points->y_max = points->data[i][j].y;
+			if (points->data[i][j].z < points->z_min)
+				points->z_min = points->data[i][j].z;
+			if (points->data[i][j].z > points->z_max)
+				points->z_max = points->data[i][j].z;
 			j++;
 		}
 		i++;
@@ -69,6 +75,7 @@ void	update_center(t_ptmatrix *points)
 {
 	points->x_c = (points->x_max - points->x_min) / 2;
 	points->y_c = (points->y_max - points->y_min) / 2;
+	points->z_c = (points->z_max - points->z_min) / 2;
 }
 
 void	update_int_coords(t_ptmatrix *points)

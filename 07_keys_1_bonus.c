@@ -24,5 +24,9 @@ int	handle_keypress(int keysym, t_meta *meta)
 		apply_pos_offset_x(meta);
 	else if (keysym == XK_Left)
 		apply_neg_offset_x(meta);
+	else if (keysym == XK_q)
+		rot_ax(meta, 0.0872665);
+	else if (keysym == XK_e)
+		rot_ax(meta, -0.0872665);
 	return (0);
 }
