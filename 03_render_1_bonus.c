@@ -95,6 +95,7 @@ void	render_menu(t_meta *meta)
 	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 50, WHITE_PIXEL, "Q/E : Rotation X");
 	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 70, WHITE_PIXEL, "A/D : Rotation Y");
 	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 90, WHITE_PIXEL, "Z/C : Rotation Z");
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 110, WHITE_PIXEL, "G/H : Zoom In and Out");
 }
 
 int	render(t_meta *meta)

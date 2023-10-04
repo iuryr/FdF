@@ -216,4 +216,7 @@ void	apply_neg_offset_x(t_meta *meta);
 void	rot_ax(t_meta *meta, float theta);
 void	rot_az(t_meta *meta, float theta);
 void	rot_ay(t_meta *meta, float theta);
+
+void	zoom(t_meta *meta, float scale);
+void	scale_2(t_meta *meta, float scale);
 #endif //_FDF_BONUS_H_
