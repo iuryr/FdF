@@ -219,4 +219,9 @@ void	rot_ay(t_meta *meta, float theta);
 
 void	zoom(t_meta *meta, float scale);
 void	scale_2(t_meta *meta, float scale);
+
+void	to_profile(t_ptmatrix *pt_matrix);
+
+void	render_profile(t_meta *meta);
+void	render_iso(t_meta *meta);
 #endif //_FDF_BONUS_H_

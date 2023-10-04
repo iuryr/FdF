@@ -87,6 +87,27 @@ void	update_render(t_meta *meta)
 	render_lines(meta->pt_matrix, meta->img);
 }
 
+void	render_profile(t_meta *meta)
+{
+	load_points(meta);
+	center_to_og(&meta->pt_matrix);
+	to_profile(&meta->pt_matrix);
+	scale(&meta->pt_matrix);
+	center_to_im(&meta->pt_matrix);
+	render_lines(meta->pt_matrix, meta->img);
+	meta->re_render = 1;
+}
+
+void	render_iso(t_meta *meta)
+{
+	load_points(meta);
+	center_to_og(&meta->pt_matrix);
+	to_iso(&meta->pt_matrix);
+	scale(&meta->pt_matrix);
+	center_to_im(&meta->pt_matrix);
+	render_lines(meta->pt_matrix, meta->img);
+	meta->re_render = 1;
+}
 
 void	render_menu(t_meta *meta)
 {
@@ -96,6 +117,8 @@ void	render_menu(t_meta *meta)
 	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 70, WHITE_PIXEL, "A/D : Rotation Y");
 	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 90, WHITE_PIXEL, "Z/C : Rotation Z");
 	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 110, WHITE_PIXEL, "G/H : Zoom In and Out");
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 130, WHITE_PIXEL, "P : Profile Projection");
+	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 150, WHITE_PIXEL, "I : Back to Isometric Projection");
 }
 
 int	render(t_meta *meta)

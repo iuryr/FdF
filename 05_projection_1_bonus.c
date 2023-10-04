@@ -18,3 +18,9 @@ void	to_iso(t_ptmatrix *pt_matrix)
 	rot_ax_ac(pt_matrix, atan(1 / sqrt(2)));
 	update_px_coords(pt_matrix);
 }
+
+void	to_profile(t_ptmatrix *pt_matrix)
+{
+	rot_ax_ac(pt_matrix, M_PI / 2);
+	update_px_coords(pt_matrix);
+}

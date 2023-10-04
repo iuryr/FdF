@@ -39,6 +39,10 @@ int	handle_keypress(int keysym, t_meta *meta)
 	else if (keysym == XK_g)
 		zoom(meta, 0.95);
 	else if (keysym == XK_h)
-		zoom(meta, 1.15);
+		zoom(meta, 1.05);
+	else if (keysym == XK_p)
+		render_profile(meta);
+	else if (keysym == XK_i)
+		render_iso(meta);
 	return (0);
 }
