@@ -61,6 +61,7 @@ void	rot_az(t_meta *meta, float theta)
 	rot_az_ac(&meta->pt_matrix, theta);
 	update_int_coords(&meta->pt_matrix);
 	og_to_center(&meta->pt_matrix);
+	meta->pt_matrix.theta_z += theta;
 	meta->re_render = 1;
 }
 
@@ -99,6 +100,7 @@ void	rot_ay(t_meta *meta, float theta)
 	rot_ay_ac(&meta->pt_matrix, theta);
 	update_int_coords(&meta->pt_matrix);
 	og_to_center(&meta->pt_matrix);
+	meta->pt_matrix.theta_y += theta;
 	meta->re_render = 1;
 }
 
@@ -137,6 +139,7 @@ void	rot_ax(t_meta *meta, float theta)
 	rot_ax_ac(&meta->pt_matrix, theta);
 	update_int_coords(&meta->pt_matrix);
 	og_to_center(&meta->pt_matrix);
+	meta->pt_matrix.theta_x += theta;
 	meta->re_render = 1;
 }
 

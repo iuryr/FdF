@@ -24,17 +24,17 @@ int	handle_keypress(int keysym, t_meta *meta)
 		apply_pos_offset_x(meta);
 	else if (keysym == XK_Left)
 		apply_neg_offset_x(meta);
-	else if (keysym == XK_q)
+	else if (keysym == XK_q && meta->pt_matrix.theta_x < M_PI / 6)
 		rot_ax(meta, 0.0872665);
-	else if (keysym == XK_e)
+	else if (keysym == XK_e && meta->pt_matrix.theta_x > -M_PI / 6)
 		rot_ax(meta, -0.0872665);
-	else if (keysym == XK_a)
+	else if (keysym == XK_a && meta->pt_matrix.theta_y < M_PI / 8)
 		rot_ay(meta, 0.0872665);
-	else if (keysym == XK_d)
+	else if (keysym == XK_d && meta->pt_matrix.theta_y > -M_PI / 8)
 		rot_ay(meta, -0.0872665);
-	else if (keysym == XK_z)
+	else if (keysym == XK_z && meta->pt_matrix.theta_z < M_PI / 6)
 		rot_az(meta, 0.0872665);
-	else if (keysym == XK_c)
+	else if (keysym == XK_c && meta->pt_matrix.theta_z > -M_PI / 6)
 		rot_az(meta, -0.0872665);
 	return (0);
 }

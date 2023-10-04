@@ -57,6 +57,9 @@ void	load_points(t_meta *meta)
 		}
 		i++;
 	}
+	meta->pt_matrix.theta_x = 0;
+	meta->pt_matrix.theta_y = 0;
+	meta->pt_matrix.theta_z = 0;
 	set_minmax(&meta->pt_matrix);
 	update_minmax(&meta->pt_matrix);
 	update_center(&meta->pt_matrix);

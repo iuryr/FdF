@@ -96,6 +96,9 @@ typedef struct s_ptmatrix
 	int				z_c;
 	int				x_offset;
 	int				y_offset;
+	float			theta_x;
+	float			theta_y;
+	float			theta_z;
 	float			scale;
 	t_point			**data;
 }	t_ptmatrix;
