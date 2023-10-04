@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/10/04 18:56:26 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:22:37 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct s_meta
 	t_img		*menu_img;
 	t_map		map;
 	t_ptmatrix	pt_matrix;
-	int		re_render;
+	int			re_render;
 }	t_meta;
 
 typedef struct s_line
@@ -142,6 +142,7 @@ int				graph_facilities_init(t_meta *meta);
 int				win_init(t_meta *meta);
 int				img_init(t_meta *meta);
 int				menu_img_init(t_meta *meta);
+int				init_hooks(t_meta *meta);
 
 /* Map parsing functions */
 int				load_map(t_meta *meta, char *filename);
@@ -172,6 +173,7 @@ int				fdf_atox(const char *s);
 
 /* Geometry functions*/
 void			scale(t_ptmatrix *pt_matrix);
+void			scale_2(t_meta *meta, float scale);
 void			center_to_im(t_ptmatrix *pt_matrix);
 void			center_to_og(t_ptmatrix *points);
 void			og_to_center(t_ptmatrix *points);
@@ -179,7 +181,17 @@ void			init_trig(t_trig *angle, float theta);
 void			rot_az_ac(t_ptmatrix *points, float theta);
 void			rot_ay_ac(t_ptmatrix *points, float theta);
 void			rot_ax_ac(t_ptmatrix *points, float theta);
+void			rot_ax(t_meta *meta, float theta);
+void			rot_az(t_meta *meta, float theta);
+void			rot_ay(t_meta *meta, float theta);
+void			apply_neg_offset_y(t_meta *meta);
+void			apply_pos_offset_y(t_meta *meta);
+void			apply_pos_offset_x(t_meta *meta);
+void			apply_neg_offset_x(t_meta *meta);
+
+/* Projection Functions */
 void			to_iso(t_ptmatrix *pt_matrix);
+void			to_profile(t_ptmatrix *pt_matrix);
 
 /* Drawing functions */
 void			img_pix_put(t_img *img, int x, int y, int color);
@@ -200,36 +212,20 @@ int				render(t_meta *meta);
 void			render_img_bg(t_img *img, int color);
 void			render_menu_bg(t_img *img, int color);
 void			render_lines(t_ptmatrix points, t_img *img);
+void			render_profile(t_meta *meta);
+void			render_iso(t_meta *meta);
+void			update_render(t_meta *meta);
+void			render_menu(t_meta *meta);
+void			zoom(t_meta *meta, float scale);
 
 /* Key pressing & releasing*/
 int				handle_keypress(int keysym, t_meta *meta);
+int				handle_keypress2(int keysym, t_meta *meta);
 
 /* Graphics facilities cleanup utilities */
 int				free_matrix_data(t_meta *meta);
 int				free_map_data(t_meta *meta);
 int				cleanup_graph_resources(t_meta *meta);
 int				on_close(t_meta *meta);
-
-int	init_hooks(t_meta *meta);
-void	apply_neg_offset_y(t_meta *meta);
-void	apply_pos_offset_y(t_meta *meta);
-void	apply_pos_offset_x(t_meta *meta);
-void	apply_neg_offset_x(t_meta *meta);
-
-void	rot_ax(t_meta *meta, float theta);
-void	rot_az(t_meta *meta, float theta);
-void	rot_ay(t_meta *meta, float theta);
-
-void	zoom(t_meta *meta, float scale);
-void	scale_2(t_meta *meta, float scale);
-
-void	to_profile(t_ptmatrix *pt_matrix);
-
-void	render_profile(t_meta *meta);
-void	render_iso(t_meta *meta);
-void	update_render(t_meta *meta);
-void	render_menu(t_meta *meta);
-
-int	handle_keypress2(int keysym, t_meta *meta);
 
 #endif //_FDF_BONUS_H_
