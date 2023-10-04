@@ -43,6 +43,7 @@
 # define WHITE_PIXEL 0xFFFFFF
 # define BLUE_PIXEL 0x0000FF
 # define BLACK_PIXEL 0x000000
+# define DARK_GREY 0x5A5A5A
 
 typedef struct s_trig
 {
