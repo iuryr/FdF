@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:52:55 by iusantos          #+#    #+#             */
-/*   Updated: 2023/10/04 18:55:35 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:17:02 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	load_map(t_meta *meta, char *filename)
 
 int	get_map_dimensions(t_map *map, char *filename)
 {
-	int					fd;
+	int		fd;
 	char	buf[1];
 
 	fd = open(filename, O_RDONLY);
