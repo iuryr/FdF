@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/27 16:21:43 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:35:22 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <math.h>
 # include <mlx.h>
 # include "./libft/libft.h"
-# include <X11/keysym.h> //macros com definição de teclas
-# include <X11/X.h> //macros com definição de events e masks
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 # define SYS_ERROR 1
 # define FILDE_ERROR 11
@@ -195,8 +195,8 @@ unsigned int	ft_abs(int number);
 /* Rendering Functions */
 void			prepare_first_render(t_meta *meta);
 int				render(t_meta *meta);
-void	render_img_bg(t_img *img, int color);
-void	render_menu_bg(t_img *img, int color);
+void			render_img_bg(t_img *img, int color);
+void			render_menu_bg(t_img *img, int color);
 void			render_lines(t_ptmatrix points, t_img *img);
 
 /* Key pressing & releasing*/
@@ -225,4 +225,9 @@ void	to_profile(t_ptmatrix *pt_matrix);
 
 void	render_profile(t_meta *meta);
 void	render_iso(t_meta *meta);
+void	update_render(t_meta *meta);
+void	render_menu(t_meta *meta);
+
+int	handle_keypress2(int keysym, t_meta *meta);
+
 #endif //_FDF_BONUS_H_

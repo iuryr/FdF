@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 14:13:33 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/28 14:03:22 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:17:16 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,128 +101,5 @@ void	rot_ay(t_meta *meta, float theta)
 	update_int_coords(&meta->pt_matrix);
 	og_to_center(&meta->pt_matrix);
 	meta->pt_matrix.theta_y += theta;
-	meta->re_render = 1;
-}
-
-//rotate figure through yz theta radians clockwise around its own center
-void	rot_ax_ac(t_ptmatrix *points, float theta)
-{
-	t_trig			trig;
-	unsigned int	i;
-	unsigned int	j;
-	float			yt;
-	float			zt;
-
-	init_trig(&trig, theta);
-	i = 0;
-	while (i < points->rows)
-	{
-		j = 0;
-		while (j < points->cols)
-		{
-			yt = points->data[i][j].yf;
-			zt = points->data[i][j].zf;
-			points->data[i][j].yf = yt * trig.cosa
-				- zt * trig.sina;
-			points->data[i][j].zf = yt * trig.sina
-				+ zt * trig.cosa;
-			j++;
-		}
-		i++;
-	}
-	update_int_coords(points);
-}
-
-void	rot_ax(t_meta *meta, float theta)
-{
-	center_to_og(&meta->pt_matrix);
-	rot_ax_ac(&meta->pt_matrix, theta);
-	update_int_coords(&meta->pt_matrix);
-	og_to_center(&meta->pt_matrix);
-	meta->pt_matrix.theta_x += theta;
-	meta->re_render = 1;
-}
-
-void	apply_neg_offset_y(t_meta *meta)
-{
-	unsigned int i;
-	unsigned int j;
-
-	i = 0;
-	j = 0;
-	while (i < meta->pt_matrix.rows)
-	{
-		j = 0;
-		while (j < meta->pt_matrix.cols)
-		{
-			meta->pt_matrix.data[i][j].yf -= 10;
-			j++;
-		}
-		i++;
-	}
-	update_px_coords(&meta->pt_matrix);
-	meta->re_render = 1;
-}
-
-void	apply_pos_offset_y(t_meta *meta)
-{
-	unsigned int i;
-	unsigned int j;
-
-	i = 0;
-	j = 0;
-	while (i < meta->pt_matrix.rows)
-	{
-		j = 0;
-		while (j < meta->pt_matrix.cols)
-		{
-			meta->pt_matrix.data[i][j].yf += 10;
-			j++;
-		}
-		i++;
-	}
-	update_px_coords(&meta->pt_matrix);
-	meta->re_render = 1;
-}
-
-void	apply_neg_offset_x(t_meta *meta)
-{
-	unsigned int i;
-	unsigned int j;
-
-	i = 0;
-	j = 0;
-	while (i < meta->pt_matrix.rows)
-	{
-		j = 0;
-		while (j < meta->pt_matrix.cols)
-		{
-			meta->pt_matrix.data[i][j].xf -= 10;
-			j++;
-		}
-		i++;
-	}
-	update_px_coords(&meta->pt_matrix);
-	meta->re_render = 1;
-}
-
-void	apply_pos_offset_x(t_meta *meta)
-{
-	unsigned int i;
-	unsigned int j;
-
-	i = 0;
-	j = 0;
-	while (i < meta->pt_matrix.rows)
-	{
-		j = 0;
-		while (j < meta->pt_matrix.cols)
-		{
-			meta->pt_matrix.data[i][j].xf += 10;
-			j++;
-		}
-		i++;
-	}
-	update_px_coords(&meta->pt_matrix);
 	meta->re_render = 1;
 }

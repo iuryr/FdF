@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:22:43 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/28 14:03:40 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:22:55 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ int	handle_keypress(int keysym, t_meta *meta)
 		rot_az(meta, 0.0872665);
 	else if (keysym == XK_c && meta->pt_matrix.theta_z > -M_PI / 6)
 		rot_az(meta, -0.0872665);
-	else if (keysym == XK_g)
+	return (0);
+}
+
+int	handle_keypress2(int keysym, t_meta *meta)
+{
+	if (keysym == XK_g)
 		zoom(meta, 0.95);
 	else if (keysym == XK_h)
 		zoom(meta, 1.05);

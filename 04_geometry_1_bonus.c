@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:30 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/28 14:33:35 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:15:46 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	scale_2(t_meta *meta, float scale)
 {
 	unsigned int	i;
 	unsigned int	j;
-	t_ptmatrix	*pt_matrix;
+	t_ptmatrix		*pt_matrix;
 
 	pt_matrix = &meta->pt_matrix;
 	i = 0;
@@ -114,33 +114,4 @@ void	center_to_og(t_ptmatrix *points)
 		}
 		i++;
 	}
-}
-
-void	og_to_center(t_ptmatrix *points)
-{
-	unsigned int	i;
-	unsigned int	j;
-
-	i = 0;
-	while (i < points->rows)
-	{
-		j = 0;
-		while (j < points->cols)
-		{
-			points->data[i][j].x = points->data[i][j].x + points->x_c;
-			points->data[i][j].xf = points->data[i][j].xf + points->x_c;
-			points->data[i][j].y = points->data[i][j].y + points->y_c;
-			points->data[i][j].yf = points->data[i][j].yf + points->y_c;
-			points->data[i][j].z = points->data[i][j].z + points->z_c;
-			points->data[i][j].zf = points->data[i][j].zf + points->z_c;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	init_trig(t_trig *angle, float theta)
-{
-	angle->cosa = cos(theta);
-	angle->sina = sin(theta);
 }

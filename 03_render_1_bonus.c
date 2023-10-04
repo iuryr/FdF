@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:46:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/28 14:03:10 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:43:38 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,56 +79,14 @@ void	prepare_first_render(t_meta *meta)
 	render_lines(meta->pt_matrix, meta->img);
 }
 
-void	update_render(t_meta *meta)
-{
-	mlx_clear_window(meta->mlx_ptr, meta->win_ptr);
-	render_img_bg(meta->img, BLACK_PIXEL);
-	render_menu_bg(meta->menu_img, DARK_GREY);
-	render_lines(meta->pt_matrix, meta->img);
-}
-
-void	render_profile(t_meta *meta)
-{
-	load_points(meta);
-	center_to_og(&meta->pt_matrix);
-	to_profile(&meta->pt_matrix);
-	scale(&meta->pt_matrix);
-	center_to_im(&meta->pt_matrix);
-	render_lines(meta->pt_matrix, meta->img);
-	meta->re_render = 1;
-}
-
-void	render_iso(t_meta *meta)
-{
-	load_points(meta);
-	center_to_og(&meta->pt_matrix);
-	to_iso(&meta->pt_matrix);
-	scale(&meta->pt_matrix);
-	center_to_im(&meta->pt_matrix);
-	render_lines(meta->pt_matrix, meta->img);
-	meta->re_render = 1;
-}
-
-void	render_menu(t_meta *meta)
-{
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 10, WHITE_PIXEL, "FDF - iusantos");
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 30, WHITE_PIXEL, "ARROWS: TRANSLATION");
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 50, WHITE_PIXEL, "Q/E: Rotation X");
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 70, WHITE_PIXEL, "A/D: Rotation Y");
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 90, WHITE_PIXEL, "Z/C: Rotation Z");
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 110, WHITE_PIXEL, "G/H : Zoom In and Out");
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 130, WHITE_PIXEL, "P: Profile Projection");
-	mlx_string_put(meta->mlx_ptr, meta->win_ptr, 10, 150, WHITE_PIXEL, "I: Reset Isometric Projection");
-}
-
 int	render(t_meta *meta)
 {
 	if (meta->win_ptr == NULL)
 		return (-1);
 	if (meta->re_render == 1)
 		update_render(meta);
-	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->menu_img->mlx_img,
-		0, 0);
+	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr,
+		meta->menu_img->mlx_img, 0, 0);
 	mlx_put_image_to_window(meta->mlx_ptr, meta->win_ptr, meta->img->mlx_img,
 		MENU_WIDTH, 0);
 	render_menu(meta);

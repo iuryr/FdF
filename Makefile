@@ -35,14 +35,17 @@ BONUS_SRC_FILES = main_bonus.c \
 			01_load_points_3_bonus.c \
 			02_init_1_bonus.c \
 			03_render_1_bonus.c \
+			03_render_2_bonus.c \
 			04_geometry_1_bonus.c \
 			04_geometry_2_bonus.c \
+			04_geometry_3_bonus.c \
+			04_geometry_4_bonus.c \
 			05_projection_1_bonus.c \
 			06_draw_1_bonus.c \
 			06_draw_2_bonus.c \
 			07_keys_1_bonus.c \
 			08_graphic_cleanup_1_bonus.c \
-			09_hooks_1.c
+			09_hooks_1_bonus.c
 
 BRES_FILES = bres_test.c \
 			 init.c \

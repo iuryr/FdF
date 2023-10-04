@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:04:15 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/27 15:07:05 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:35:50 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	img_init(t_meta *meta)
 		free(meta->mlx_ptr);
 		exit(IMG_INIT_ERROR);
 	}
-	meta->img->mlx_img = mlx_new_image(meta->mlx_ptr,IMG_WIDTH , IMG_HEIGHT);
+	meta->img->mlx_img = mlx_new_image(meta->mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
 	meta->img->addr = mlx_get_data_addr(meta->img->mlx_img, &meta->img->bpp,
 			&meta->img->line_len, &meta->img->endian);
 	return (0);
@@ -72,7 +72,7 @@ int	menu_img_init(t_meta *meta)
 	meta->menu_img->mlx_img = mlx_new_image(meta->mlx_ptr, MENU_WIDTH,
 			MENU_HEIGHT);
 	meta->menu_img->addr = mlx_get_data_addr(
-		meta->menu_img->mlx_img, &meta->menu_img->bpp,
-		&meta->menu_img->line_len, &meta->menu_img->endian);
+			meta->menu_img->mlx_img, &meta->menu_img->bpp,
+			&meta->menu_img->line_len, &meta->menu_img->endian);
 	return (0);
 }
