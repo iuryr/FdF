@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:56:44 by iusantos          #+#    #+#             */
-/*   Updated: 2023/10/04 17:35:22 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:14:25 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define MLX_INIT_ERROR 21
 # define MLX_WIN_ERROR 22
 # define ARGC_ERROR 3
+# define ARGC_BAD_XT 31
 # define IMG_INIT_ERROR 4
 # define PTS_INIT_ERROR 5
 # define MAP_DIM_ERROR 6

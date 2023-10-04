@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:52:55 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/27 14:39:40 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:03:46 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	load_map(t_meta *meta, char *filename)
 {
+	if (ft_strnstr(filename, ".fdf", 1024) == NULL)
+	{
+		ft_printf("File extension is not proper.\n");
+		exit(ARGC_BAD_XT);
+	}
 	if (get_map_dimensions(&meta->map, filename) != 0)
 		return (1);
 	alloc_map_data(&meta->map);

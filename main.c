@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:50:46 by iusantos          #+#    #+#             */
-/*   Updated: 2023/09/27 15:40:07 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:54:29 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		ft_printf("Usage: ./fdf map_file_name\n");
+		ft_printf("Usage: ./fdf map_file_name.fdf\n");
 		exit(ARGC_ERROR);
 	}
 	if (load_map(&meta, argv[1]) != 0)
