@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:52:55 by iusantos          #+#    #+#             */
-/*   Updated: 2023/10/04 18:13:57 by iusantos         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:55:35 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,16 @@ int	load_map(t_meta *meta, char *filename)
 int	get_map_dimensions(t_map *map, char *filename)
 {
 	int					fd;
+	char	buf[1];
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (1);
+	if (read(fd, buf, 0) == -1)
+	{
+		ft_printf("File is not proper. Exiting.\n");
+		exit(ARGC_BAD_READ);
+	}
 	get_map_cols(map, fd);
 	get_map_rows(map, fd);
 	map->points_count = map->rows * map->cols;
